@@ -1,4 +1,4 @@
-import LoginGuideScreen from '../screens/LoginGuideScreen';
+import LoginGuideScreen from '../screens/auth/LoginGuideScreen';
 import PropTypes from 'prop-types';
 
 const AuthRequired = ({ children }) => {

@@ -1,4 +1,5 @@
 export const AppRoute = {
+  BOTTOM_BAR: 'BottomBar',
   CREATE_SPACE: 'CreateSpace',
   FIND_PASSWORD: 'FindPassword',
   LOGIN: 'Login',
