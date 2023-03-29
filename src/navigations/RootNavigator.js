@@ -1,9 +1,9 @@
 import { NavigationContainer } from '@react-navigation/native';
-import BottomBarRoute from './BottomBarRoute';
+import BottomBarNavigator from './BottomBarNavigator';
 // import { useEffect, useState } from 'react';
 // import * as SplashScreen from 'expo-splash-screen';
 
-const Navigation = () => {
+const RootNavigator = () => {
   // const [isReady, setIsReady] = useState(false);
   // useEffect(() => {
   //   (async () => {
@@ -30,9 +30,9 @@ const Navigation = () => {
 
   return (
     <NavigationContainer>
-      <BottomBarRoute />
+      <BottomBarNavigator />
     </NavigationContainer>
   );
 };
 
-export default Navigation;
+export default RootNavigator;

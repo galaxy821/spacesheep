@@ -1,4 +1,20 @@
-export const BottomBarRoutes = {
+export const AppRoute = {
+  CREATE_SPACE: 'CreateSpace',
+  FIND_PASSWORD: 'FindPassword',
+  LOGIN: 'Login',
+  MOMENT_CONTENT: 'MomentContent',
+  NOTICE: 'Notice',
+  PROFILE_SETTING: 'ProfileSetting',
+  SEARCH_RESULT: 'SearchResult',
+  SET_PROFILE: 'SetProfile',
+  SIGN_UP: 'SignUp',
+  SPACE: 'Space',
+  SPACE_SETTING: 'SpaceSetting',
+  VERIFIED_EMAIL: 'VerifiedEmail',
+  WELCOME: 'Welcome',
+};
+
+export const BottomBarRoute = {
   HOME: 'Home',
   MOMENT: 'Moment',
   BOOKMARK: 'Bookmark',
@@ -7,15 +23,11 @@ export const BottomBarRoutes = {
   LOGIN_GUIDE: 'LoginGuide',
 };
 
-export const HomeRoutes = {
-  HOME: 'Home',
-  SEARCH_RESULT: 'SearchResult',
-  NOTICE: 'Notice',
-  SPACE: 'Space',
-};
-
 export const AuthRoutes = {
-  LOGIN_GUIDE: 'LoginGuide',
+  FIND_PASSWORD: 'FindPassword',
   LOGIN: 'Login',
+  SET_PROFILE: 'SetProfile',
   SIGN_UP: 'SignUp',
+  VERIFIED_EMAIL: 'VerifiedEmail',
+  WELCOME: 'Welcome',
 };

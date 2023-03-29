@@ -1,14 +1,14 @@
 import { StyleSheet, Text, View } from 'react-native';
 
-const NoticeScreen = () => {
+const WelcomeScreen = () => {
   return (
-    <View style={noticeStyles.container}>
-      <Text>NoticeScreen</Text>
+    <View style={welcomeStyles.container}>
+      <Text>WelcomeScreen</Text>
     </View>
   );
 };
 
-const noticeStyles = StyleSheet.create({
+const welcomeStyles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
@@ -16,4 +16,4 @@ const noticeStyles = StyleSheet.create({
   },
 });
 
-export default NoticeScreen;
+export default WelcomeScreen;
