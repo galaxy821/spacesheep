@@ -1,21 +1,20 @@
 import { Button, StyleSheet, Text, View } from 'react-native';
+import styled from 'styled-components/native';
 
 const HomeScreen = () => {
   return (
-    <View style={homeStyles.container}>
+    <Container>
       <Text>HomeScreen</Text>
       <Button title="button"></Button>
-    </View>
+    </Container>
   );
 };
 
-const homeStyles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: 'white',
-  },
-});
+const Container = styled.View`
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+  background-color: gray;
+`;
 
 export default HomeScreen;

@@ -17,6 +17,5 @@
   "plugins": ["react"],
   "rules": {
     "no-console": "warn"
-    // "reactprop-types": "off"
   }
 }
