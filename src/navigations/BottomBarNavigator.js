@@ -27,7 +27,7 @@ function BottomBarNavigator() {
         tabBarActiveTintColor: 'skyblue',
         tabBarInactiveTintColor: 'gray',
         tabBarShowLabel: false,
-        tabBarStyle: { height: 80 },
+        tabBarStyle: { height: 90 },
       }}
     >
       <BottomTab.Screen

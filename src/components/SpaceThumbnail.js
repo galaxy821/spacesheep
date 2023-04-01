@@ -24,7 +24,7 @@ const SpaceThumbnail = ({ space }) => {
 };
 
 const SpaceTouchable = styled.TouchableOpacity`
-  margin-top: 15px;
+  margin-bottom: 15px;
   margin-left: 15px;
 `;
 

@@ -32,7 +32,7 @@ function AppNavigator() {
         name={AppRoute.FIND_PASSWORD}
         component={FindPasswordScreen}
       />
-      <AppStack.Screen name={AppRoute.LOGIN} component={LoginScreen} />
+      {/* <AppStack.Screen name={AppRoute.LOGIN} component={LoginScreen} /> */}
       <AppStack.Screen
         name={AppRoute.MOMENT_CONTENT}
         component={MomentContentScreen}
@@ -50,7 +50,7 @@ function AppNavigator() {
         name={AppRoute.SET_PROFILE}
         component={SetProfileScreen}
       />
-      <AppStack.Screen name={AppRoute.SIGN_UP} component={SignUpScreen} />
+      {/* <AppStack.Screen name={AppRoute.SIGN_UP} component={SignUpScreen} /> */}
       <AppStack.Screen name={AppRoute.SPACE} component={SpaceScreen} />
       <AppStack.Screen
         name={AppRoute.SPACE_SETTING}

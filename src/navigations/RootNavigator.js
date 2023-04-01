@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import * as SplashScreen from 'expo-splash-screen';
 import AppNavigator from './AppNavigator';
 import * as Font from 'expo-font';
+import ModalNavigator from './AuthNavigator';
 
 const RootNavigator = () => {
   const [isReady, setIsReady] = useState(false);
@@ -41,7 +42,7 @@ const RootNavigator = () => {
 
   return (
     <NavigationContainer onReady={onReady}>
-      <AppNavigator />
+      <ModalNavigator />
     </NavigationContainer>
   );
 };

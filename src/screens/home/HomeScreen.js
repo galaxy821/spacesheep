@@ -1,6 +1,9 @@
 import { useNavigation } from '@react-navigation/native';
 import { View } from 'react-native';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import {
+  SafeAreaView,
+  useSafeAreaInsets,
+} from 'react-native-safe-area-context';
 import styled from 'styled-components/native';
 import TitleSection from '../../components/home/HomeHeader';
 import SearchBar from '../../components/SearchBar';
@@ -8,30 +11,40 @@ import Banner from '../../components/Banner';
 import InterestSection from '../../components/home/InterestSection';
 import SpaceThumbnail from '../../components/\bSpaceThumbnail';
 import { CellWrapper, dummyData } from '../../components/home/SpaceListSection';
+import { StatusBar } from 'expo-status-bar';
 
+const StatusBox = styled.View`
+  background-color: #fff;
+  height: ${({ safeArea }) => safeArea}px;
+`;
 const HomeScreen = () => {
   const { top } = useSafeAreaInsets();
   const renderItem = SpaceThumbnail;
 
   return (
-    <HomeContainer
-      safeArea={top}
-      bottomBarArea={80}
-      bounces={false}
-      data={dummyData}
-      renderItem={renderItem}
-      keyExtractor={item => item.id}
-      ListHeaderComponent={HomeScreenHeader}
-      numColumns={3}
-      contentContainerStyle={{
-        paddingBottom: 80,
-      }}
-      cellRendererComponent={({ children, item, index, style }) => (
-        <CellWrapper index={index} style={style} item={item}>
-          {children}
-        </CellWrapper>
-      )}
-    />
+    <>
+      <StatusBar style="dark" />
+      <StatusBox safeArea={top} />
+      <HomeContainer
+        safeArea={top}
+        bottomBarArea={100}
+        bounces={false}
+        data={dummyData}
+        renderItem={renderItem}
+        keyExtractor={item => item.id}
+        ListHeaderComponent={HomeScreenHeader}
+        showsVerticalScrollIndicator={false}
+        numColumns={3}
+        // contentContainerStyle={{
+        //   paddingBottom: 90,
+        // }}
+        cellRendererComponent={({ children, item, index, style }) => (
+          <CellWrapper index={index} style={style} item={item}>
+            {children}
+          </CellWrapper>
+        )}
+      />
+    </>
   );
 };
 
@@ -54,7 +67,7 @@ const HomeScreenHeader = () => {
 };
 
 const HomeContainer = styled.FlatList`
-  padding-top: ${({ safeArea }) => safeArea}px;
+  /* padding-top: ${({ safeArea }) => safeArea}px; */
   padding-bottom: ${({ bottomBarArea }) => bottomBarArea}px;
   background-color: #fff;
 `;
