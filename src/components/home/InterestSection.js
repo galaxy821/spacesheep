@@ -28,7 +28,7 @@ export default InterestSection;
 
 const InterestView = styled.View`
   flex-direction: column;
-  align-items: left;
+  align-items: flex-start;
   padding: 10px 15px 0px 15px;
   background-color: #fff;
 `;
