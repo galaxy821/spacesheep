@@ -11,7 +11,6 @@ import { CellWrapper, dummyData } from '../../components/home/SpaceListSection';
 
 const HomeScreen = () => {
   const { top } = useSafeAreaInsets();
-
   const renderItem = SpaceThumbnail;
 
   return (
@@ -40,6 +39,7 @@ export default HomeScreen;
 
 const HomeScreenHeader = () => {
   const navigation = useNavigation();
+
   const handleNoticePress = () => {
     navigation.navigate('Notice');
   };

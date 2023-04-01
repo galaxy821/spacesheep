@@ -1,33 +1,6 @@
 import { FlatList, View } from 'react-native';
 import SpaceThumbnail from '../\bSpaceThumbnail';
 
-const SpaceListSection = () => {
-  const renderItem = SpaceThumbnail;
-
-  const data = [
-    {
-      id: 1,
-      title: 'Space 1',
-      thumbnail: '',
-    },
-    {
-      id: 2,
-      title: 'Space 2',
-      thumbnail: '',
-    },
-  ];
-
-  return (
-    <FlatList
-      data={data}
-      renderItem={renderItem}
-      keyExtractor={item => item.id}
-    />
-  );
-};
-
-export default SpaceListSection;
-
 export const CellWrapper = ({ children, index, style, item }) => {
   // console.log(`call wrapper : ${item}`);
   return (

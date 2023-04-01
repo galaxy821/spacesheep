@@ -6,6 +6,16 @@ import ProfileScreen from '../screens/profile/ProfileScreen';
 import PostMessageScreen from '../screens/postmessage/PostMessageScreen';
 import BookmarkScreen from '../screens/bookmark/BookmarkScreen';
 import MomentScreen from '../screens/moment/MomentSccreen';
+import HomeFilledIcon from '../components/icons/HomeFilledIcon';
+import HomeOutlinedIcon from '../components/icons/HomeOutlinedIcon';
+import MomentFilledIcon from '../components/icons/MomentFilledIcon';
+import MomentOutlinedIcon from '../components/icons/MomentOutlinedIcon';
+import BookmarkFilledIcon from '../components/icons/BookmarkFilledIcon';
+import BookmarkOutlinedIcon from '../components/icons/BookmarkOutlinedIcon';
+import PostMessageFilledIcon from '../components/icons/PostMessageFilledIcon';
+import PostMessageOutlinedIcon from '../components/icons/PostMessageOutlinedIcon';
+import ProfileFilledIcon from '../components/icons/ProfileFilledIcon';
+import ProfileOutlinedIcon from '../components/icons/ProfileOutlinedIcon';
 
 const BottomTab = createBottomTabNavigator();
 
@@ -20,15 +30,34 @@ function BottomBarNavigator() {
         tabBarStyle: { height: 80 },
       }}
     >
-      <BottomTab.Screen name={BottomBarRoute.HOME} component={HomeScreen} />
-      <BottomTab.Screen name={BottomBarRoute.MOMENT}>
+      <BottomTab.Screen
+        name={BottomBarRoute.HOME}
+        component={HomeScreen}
+        options={{
+          tabBarIcon: ({ focused }) =>
+            focused ? <HomeFilledIcon /> : <HomeOutlinedIcon />,
+        }}
+      />
+      <BottomTab.Screen
+        name={BottomBarRoute.MOMENT}
+        options={{
+          tabBarIcon: ({ focused }) =>
+            focused ? <MomentFilledIcon /> : <MomentOutlinedIcon />,
+        }}
+      >
         {() => (
           <AuthRequired>
             <MomentScreen />
           </AuthRequired>
         )}
       </BottomTab.Screen>
-      <BottomTab.Screen name={BottomBarRoute.BOOKMARK}>
+      <BottomTab.Screen
+        name={BottomBarRoute.BOOKMARK}
+        options={{
+          tabBarIcon: ({ focused }) =>
+            focused ? <BookmarkFilledIcon /> : <BookmarkOutlinedIcon />,
+        }}
+      >
         {() => (
           <AuthRequired>
             <BookmarkScreen />
@@ -36,14 +65,26 @@ function BottomBarNavigator() {
         )}
       </BottomTab.Screen>
 
-      <BottomTab.Screen name={BottomBarRoute.POST_MESSAGE}>
+      <BottomTab.Screen
+        name={BottomBarRoute.POST_MESSAGE}
+        options={{
+          tabBarIcon: ({ focused }) =>
+            focused ? <PostMessageFilledIcon /> : <PostMessageOutlinedIcon />,
+        }}
+      >
         {() => (
           <AuthRequired>
             <PostMessageScreen />
           </AuthRequired>
         )}
       </BottomTab.Screen>
-      <BottomTab.Screen name={BottomBarRoute.PROFILE}>
+      <BottomTab.Screen
+        name={BottomBarRoute.PROFILE}
+        options={{
+          tabBarIcon: ({ focused }) =>
+            focused ? <ProfileFilledIcon /> : <ProfileOutlinedIcon />,
+        }}
+      >
         {() => (
           <AuthRequired>
             <ProfileScreen />

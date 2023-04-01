@@ -7,7 +7,6 @@ const BANNER_IMAGES = [
   require('../../assets/dummy/banner/Rectangle206.png'),
   require('../../assets/dummy/banner/Rectangle207.png'),
   require('../../assets/dummy/banner/Rectangle208.png'),
-  // Add more images as needed
 ];
 
 const Banner = () => {
@@ -22,9 +21,9 @@ const Banner = () => {
         flatListRef.current.scrollToIndex({ index: newIndex, animated: true });
         return newIndex;
       });
-    }, 3000); // 자동 스크롤 간격 설정 (3000ms = 3초)
+    }, 5000);
 
-    return () => clearInterval(timer); // 컴포넌트가 unmount 될 때 타이머 해제
+    return () => clearInterval(timer);
   }, []);
 
   return (
@@ -38,7 +37,7 @@ const Banner = () => {
       renderItem={({ item }) => (
         <Image
           source={item}
-          style={{ width, height: 200 }} // 이미지 크기 설정
+          style={{ width, height: 200 }}
           resizeMode="cover"
         />
       )}

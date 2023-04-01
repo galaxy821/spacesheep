@@ -3,31 +3,6 @@ import styled from 'styled-components';
 import InterestButton from './InterestButton';
 
 const InterestSection = () => {
-  //   const [interests, setInterests] = useState([]);
-
-  //   const getInterests = async () => {
-  //     const { data } = await axios.get('http://localhost:3000/interests');
-  //     setInterests(data);
-  //   };
-
-  //   useEffect(() => {
-  //     getInterests();
-  //   }, []);
-
-  //   const renderItem = ({ item }) => (
-  //     <TouchableOpacity>
-  //       <Text>{item.name}</Text>
-  //     </TouchableOpacity>
-  //   );
-
-  //   return (
-  //     <FlatList
-  //       data={interests}
-  //       renderItem={renderItem}
-  //       keyExtractor={item => item.id}
-  //     />
-  //   );
-
   return (
     <InterestView>
       <InterestTitle>관심사를 골라보세요</InterestTitle>
