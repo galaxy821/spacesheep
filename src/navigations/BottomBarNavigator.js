@@ -17,6 +17,7 @@ function BottomBarNavigator() {
         tabBarActiveTintColor: 'skyblue',
         tabBarInactiveTintColor: 'gray',
         tabBarShowLabel: false,
+        tabBarStyle: { height: 80 },
       }}
     >
       <BottomTab.Screen name={BottomBarRoute.HOME} component={HomeScreen} />

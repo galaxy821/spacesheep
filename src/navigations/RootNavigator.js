@@ -6,17 +6,20 @@ import * as Font from 'expo-font';
 
 const RootNavigator = () => {
   const [isReady, setIsReady] = useState(false);
+
+  const getFonts = async () => {
+    await Font.loadAsync({
+      'KoddiUDOnGothic-Bold': require('../../assets/fonts/KoddiUDOnGothic-Bold.otf'),
+      'KoddiUDOnGothic-ExtraBold': require('../../assets/fonts/KoddiUDOnGothic-ExtraBold.otf'),
+      'KoddiUDOnGothic-Regular': require('../../assets/fonts/KoddiUDOnGothic-Regular.otf'),
+    });
+  };
+
   useEffect(() => {
     (async () => {
       try {
+        await getFonts();
         await SplashScreen.preventAutoHideAsync();
-        const getFonts = async () => {
-          await Font.loadAsync({
-            'Roboto-Regular': require('../../assets/fonts/KoddiUDOnGothic-Bold.otf'),
-            'Roboto-Medium': require('../../assets/fonts/KoddiUDOnGothic-ExtraBold.otf'),
-            'Roboto-Bold': require('../../assets/fonts/KoddiUDOnGothic-Regular.otf'),
-          });
-        };
       } catch (e) {
         // eslint-disable-next-line no-console
         console.log(e);
