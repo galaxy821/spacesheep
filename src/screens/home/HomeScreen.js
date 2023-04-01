@@ -9,7 +9,7 @@ import TitleSection from '../../components/home/HomeHeader';
 import SearchBar from '../../components/SearchBar';
 import Banner from '../../components/Banner';
 import InterestSection from '../../components/home/InterestSection';
-import SpaceThumbnail from '../../components/\bSpaceThumbnail';
+import SpaceThumbnail from '../../components/SpaceThumbnail';
 import { CellWrapper, dummyData } from '../../components/home/SpaceListSection';
 import { StatusBar } from 'expo-status-bar';
 

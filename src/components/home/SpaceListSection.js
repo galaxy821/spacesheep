@@ -1,5 +1,5 @@
 import { FlatList, View } from 'react-native';
-import SpaceThumbnail from '../\bSpaceThumbnail';
+import SpaceThumbnail from '../SpaceThumbnail';
 
 export const CellWrapper = ({ children, index, style, item }) => {
   // console.log(`call wrapper : ${item}`);
