@@ -1,19 +1,16 @@
 import { NavigationContainer } from '@react-navigation/native';
 import { useEffect, useState } from 'react';
 import * as SplashScreen from 'expo-splash-screen';
-import AppNavigator from './AppNavigator';
+// import AppNavigator from './AppNavigator';
 import * as Font from 'expo-font';
 import ModalNavigator from './AuthNavigator';
+import { KoddiUDOnGothic } from '../styles/DefaultStyle';
 
 const RootNavigator = () => {
   const [isReady, setIsReady] = useState(false);
 
   const getFonts = async () => {
-    await Font.loadAsync({
-      'KoddiUDOnGothic-Bold': require('../../assets/fonts/KoddiUDOnGothic-Bold.otf'),
-      'KoddiUDOnGothic-ExtraBold': require('../../assets/fonts/KoddiUDOnGothic-ExtraBold.otf'),
-      'KoddiUDOnGothic-Regular': require('../../assets/fonts/KoddiUDOnGothic-Regular.otf'),
-    });
+    await Font.loadAsync(KoddiUDOnGothic);
   };
 
   useEffect(() => {

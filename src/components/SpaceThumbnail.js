@@ -1,48 +1,34 @@
-import { Dimensions, Image, Text, TouchableOpacity, View } from 'react-native';
-import styled from 'styled-components';
+import { Dimensions, Image } from 'react-native';
+import { SpaceThumbnailStyle } from '../styles/DefaultStyle';
+import { PropTypes } from 'prop-types';
 
 const screenWidth = (Dimensions.get('window').width - 60) / 3;
 
 const SpaceThumbnail = ({ space }) => {
-  //   const { id, name, description, image, color } = space;
+  console.log(space);
+  const { id, name, image, description, color } = space;
 
   return (
-    <SpaceTouchable
+    <SpaceThumbnailStyle.Button
       activeOpacity={0.75}
       onPress={() => {
         console.log('SpaceThumbnail pressed');
       }}
     >
-      <SpaceThumbnailBox screenWidth={screenWidth}>
+      <SpaceThumbnailStyle.Box screenWidth={screenWidth}>
         <Image />
-      </SpaceThumbnailBox>
-      <SpaceTitleBox>
-        <SpaceTitle numberOfLines={1}>{'space name'}</SpaceTitle>
-      </SpaceTitleBox>
-    </SpaceTouchable>
+      </SpaceThumbnailStyle.Box>
+      <SpaceThumbnailStyle.TitleBox>
+        <SpaceThumbnailStyle.Title numberOfLines={1}>
+          {name}
+        </SpaceThumbnailStyle.Title>
+      </SpaceThumbnailStyle.TitleBox>
+    </SpaceThumbnailStyle.Button>
   );
 };
 
-const SpaceTouchable = styled.TouchableOpacity`
-  margin-bottom: 15px;
-  margin-left: 15px;
-`;
-
-const SpaceThumbnailBox = styled.View`
-  width: ${props => props.screenWidth}px;
-  height: ${props => props.screenWidth}px;
-  border-radius: 25px;
-  background-color: #f1e09b;
-`;
-
-const SpaceTitleBox = styled.View`
-  padding-left: 10px;
-  margin-top: 5px;
-`;
-
-const SpaceTitle = styled.Text`
-  font-size: 14px;
-  font-family: 'KoddiUDOnGothic-Regular';
-`;
+SpaceThumbnail.propTypes = {
+  space: PropTypes.object,
+};
 
 export default SpaceThumbnail;

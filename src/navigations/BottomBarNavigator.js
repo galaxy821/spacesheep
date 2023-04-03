@@ -16,6 +16,7 @@ import PostMessageFilledIcon from '../components/icons/PostMessageFilledIcon';
 import PostMessageOutlinedIcon from '../components/icons/PostMessageOutlinedIcon';
 import ProfileFilledIcon from '../components/icons/ProfileFilledIcon';
 import ProfileOutlinedIcon from '../components/icons/ProfileOutlinedIcon';
+import { TAB_BAR_HEIGHT } from '../values/DefaultValue';
 
 const BottomTab = createBottomTabNavigator();
 
@@ -24,10 +25,10 @@ function BottomBarNavigator() {
     <BottomTab.Navigator
       screenOptions={{
         headerShown: false,
-        tabBarActiveTintColor: 'skyblue',
-        tabBarInactiveTintColor: 'gray',
+        // tabBarActiveTintColor: 'skyblue',
+        // tabBarInactiveTintColor: 'gray',
         tabBarShowLabel: false,
-        tabBarStyle: { height: 90 },
+        tabBarStyle: { height: TAB_BAR_HEIGHT },
       }}
     >
       <BottomTab.Screen
