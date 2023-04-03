@@ -5,7 +5,6 @@ import { PropTypes } from 'prop-types';
 const screenWidth = (Dimensions.get('window').width - 60) / 3;
 
 const SpaceThumbnail = ({ space }) => {
-  console.log(space);
   const { id, name, image, description, color } = space;
 
   return (

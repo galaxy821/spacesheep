@@ -1,5 +1,6 @@
 import { useNavigation } from '@react-navigation/native';
 import { Button, StyleSheet, Text, View } from 'react-native';
+import SearchBar from '../../components/SearchBar';
 
 const LoginScreen = () => {
   const navigation = useNavigation();
@@ -7,6 +8,7 @@ const LoginScreen = () => {
     <View style={loginStyles.container}>
       <Text>LoginScreen</Text>
       <Button title="back" onPress={() => navigation.goBack()}></Button>
+      <SearchBar />
     </View>
   );
 };
