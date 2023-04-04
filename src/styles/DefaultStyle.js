@@ -2,7 +2,7 @@ import styled from 'styled-components/native';
 
 export const FONT_BOLD = 'KoddiUDOnGothic-Bold';
 export const FONT_REGULAR = 'KoddiUDOnGothic-Regular';
-export const FONT_EXTRA_BOLD = 'TAB_BAR_HEIGHT';
+export const FONT_EXTRA_BOLD = 'KoddiUDOnGothic-ExtraBold';
 
 export const KoddiUDOnGothic = {
   'KoddiUDOnGothic-Bold': require('../../assets/fonts/KoddiUDOnGothic-Bold.otf'),
@@ -18,6 +18,19 @@ export const StatusBox = styled.View`
 export const TitleStyle = styled.Text`
   font-size: ${({ size }) => size}px;
   font-family: ${FONT_BOLD};
+`;
+
+export const HeightWidthBox = styled.View`
+  height: ${({ height }) => height}px;
+  width: ${({ width }) => width}px;
+`;
+
+export const HeightBox = styled.View`
+  height: ${({ height }) => height}px;
+`;
+
+export const WidthBox = styled.View`
+  width: ${({ width }) => width}px;
 `;
 
 export const SearchBarStyle = {
