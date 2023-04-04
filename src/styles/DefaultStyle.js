@@ -15,6 +15,11 @@ export const StatusBox = styled.View`
   height: ${({ safeArea }) => safeArea}px;
 `;
 
+export const TitleStyle = styled.Text`
+  font-size: ${({ size }) => size}px;
+  font-family: ${FONT_BOLD};
+`;
+
 export const SearchBarStyle = {
   View: styled.View`
     flex-direction: column;
