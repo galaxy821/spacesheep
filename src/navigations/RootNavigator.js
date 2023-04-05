@@ -1,10 +1,10 @@
 import { NavigationContainer } from '@react-navigation/native';
 import { useEffect, useState } from 'react';
-import * as SplashScreen from 'expo-splash-screen';
-// import AppNavigator from './AppNavigator';
 import * as Font from 'expo-font';
 import ModalNavigator from './AuthNavigator';
 import { KoddiUDOnGothic } from '../styles/DefaultStyle';
+import { useCallback } from 'react';
+import SplashScreenForSpacesheep from '../screens/SplashScreen';
 
 const RootNavigator = () => {
   const [isReady, setIsReady] = useState(false);
@@ -15,26 +15,29 @@ const RootNavigator = () => {
 
   useEffect(() => {
     (async () => {
+      await getFonts();
       try {
-        await getFonts();
-        await SplashScreen.preventAutoHideAsync();
+        // await SplashScreen.preventAutoHideAsync();
+        //i want this code to stop for 3 seconds so that the splashscreen can be seen
+        await new Promise(resolve => setTimeout(resolve, 4000));
       } catch (e) {
         // eslint-disable-next-line no-console
         console.log(e);
       } finally {
         setIsReady(true);
+        // await SplashScreen.hideAsync();
       }
     })();
   }, []);
 
-  const onReady = async () => {
+  const onReady = useCallback(async () => {
     if (isReady) {
-      await SplashScreen.hideAsync();
+      // await SplashScreen.hideAsync();
     }
-  };
+  }, [isReady]);
 
   if (!isReady) {
-    return null;
+    return <SplashScreenForSpacesheep />;
   }
 
   return (
