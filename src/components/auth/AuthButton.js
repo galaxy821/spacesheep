@@ -19,12 +19,13 @@ const AuthButtonStyle = {
     width: 240px;
     height: 50px;
     background-color: ${lightThemeColor.primary};
-    border-radius: 25px;
+    border-radius: 20px;
+    box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.2);
     justify-content: center;
     align-items: center;
   `,
   Text: styled.Text`
-    font-size: 18px;
+    font-size: 16px;
   `,
 };
 
