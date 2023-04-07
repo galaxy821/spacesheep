@@ -1,12 +1,12 @@
+import { View } from 'react-native';
+import { PropTypes } from 'prop-types';
 import { HomeBannerView, HomeFlatList } from '../../styles/HomeStyle';
 import SpaceThumbnail from '../SpaceThumbnail';
-import { View } from 'react-native';
 import TitleSection from './HomeHeader';
 import SearchBar from '../SearchBar';
 import Banner from '../Banner';
 import InterestSection from './InterestSection';
 import { HOME_BANNER_IMAGES } from '../../test/dummy/ImageForHomeBanner';
-import { PropTypes } from 'prop-types';
 import {
   BOTTOM_TAB_SAFE_AREA,
   HOME_BANNER_ROTATION_TIME,
