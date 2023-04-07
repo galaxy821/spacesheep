@@ -4,24 +4,30 @@ import * as Font from 'expo-font';
 import ModalNavigator from './AuthNavigator';
 import { KoddiUDOnGothic } from '../styles/DefaultStyle';
 import SplashScreenForSpacesheep from '../screens/SplashScreen';
-import { Reanimated, Easing } from 'react-native-reanimated';
-
-const { Value, timing, useCode, set, cond, eq, interpolate, Extrapolate } =
-  Reanimated;
+import { Animated, StyleSheet, View } from 'react-native';
 
 const RootNavigator = () => {
   const [isReady, setIsReady] = useState(false);
-  const animation = new Value(0);
+  const [showSplash, setShowSplash] = useState(true);
+  const fadeAnim = new Animated.Value(1);
 
   const getFonts = async () => {
     await Font.loadAsync(KoddiUDOnGothic);
+  };
+
+  const fadeOutAnimation = () => {
+    Animated.timing(fadeAnim, {
+      toValue: 0,
+      duration: 500,
+      useNativeDriver: true,
+    }).start(() => setShowSplash(false));
   };
 
   useEffect(() => {
     (async () => {
       await getFonts();
       try {
-        await new Promise(resolve => setTimeout(resolve, 4000));
+        await new Promise(resolve => setTimeout(resolve, 4300));
       } catch (e) {
         // eslint-disable-next-line no-console
         console.log(e);
@@ -31,48 +37,41 @@ const RootNavigator = () => {
     })();
   }, []);
 
-  useCode(
-    () =>
-      cond(
-        eq(isReady, true),
-        set(
-          animation,
-          timing({
-            from: 0,
-            to: 1,
-            duration: 1000,
-            easing: Easing.inOut(Easing.ease),
-          })
-        )
-      ),
-    [isReady]
-  );
-
-  const opacity = interpolate(animation, {
-    inputRange: [0, 1],
-    outputRange: [1, 0],
-    extrapolate: Extrapolate.CLAMP,
-  });
+  useEffect(() => {
+    if (isReady) {
+      fadeOutAnimation();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isReady]);
 
   if (!isReady) {
     return (
-      <>
+      <Animated.View style={{ flex: 1, opacity: fadeAnim }}>
         <SplashScreenForSpacesheep />
-        <Reanimated.View
-          style={{
-            ...StyleSheet.absoluteFillObject,
-            backgroundColor: 'white',
-            opacity,
-          }}
-        />
-      </>
+      </Animated.View>
     );
   }
 
   return (
-    <NavigationContainer>
-      <ModalNavigator />
-    </NavigationContainer>
+    <View style={{ flex: 1 }}>
+      {showSplash && (
+        <Animated.View
+          style={{
+            ...StyleSheet.absoluteFillObject,
+            opacity: fadeAnim,
+            zIndex: 1,
+          }}
+        >
+          <SplashScreenForSpacesheep />
+        </Animated.View>
+      )}
+      {isReady && (
+        <NavigationContainer>
+          <ModalNavigator />
+        </NavigationContainer>
+      )}
+      {/* <SplashScreenForSpacesheep /> */}
+    </View>
   );
 };
 

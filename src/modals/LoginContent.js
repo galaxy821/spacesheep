@@ -19,8 +19,9 @@ const LoginContent = ({ hideModal }) => {
             <Text>닫기</Text>
           </ExitButton>
         </LoginHeader>
+        <SpaceBox height={5} />
         <AuthFormView>
-          <Title size={36} />
+          <Title size={30} />
           <SpaceBox height={40} />
           <TextInputForAuth
             placeholder="이메일"

@@ -25,7 +25,7 @@ export const TitleContainer = styled.View`
 `;
 
 export const Title = styled.Text`
-  font-size: 22px;
+  font-size: 23px;
   font-family: ${FONT_BOLD};
 `;
 
