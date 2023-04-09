@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import React, { useEffect } from 'react';
-import { ActivityIndicator, StyleSheet, Animated } from 'react-native';
+import { ActivityIndicator, StyleSheet, Animated, Easing } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import animationLogo from '../../assets/splashAnimation.gif';
 import { Image } from 'expo-image';
@@ -17,6 +17,7 @@ const SplashScreenForSpacesheep = () => {
       toValue: 1,
       duration: 1000,
       useNativeDriver: true,
+      easing: Easing.back(),
       delay: 2500,
     }).start(() => setShowTitle(true));
 
@@ -24,6 +25,7 @@ const SplashScreenForSpacesheep = () => {
       toValue: 0,
       duration: 300,
       useNativeDriver: true,
+      esing: Easing.back(),
       delay: 4270,
     }).start();
     // eslint-disable-next-line react-hooks/exhaustive-deps

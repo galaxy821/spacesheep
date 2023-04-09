@@ -1,24 +1,23 @@
-import { Text, View, StyleSheet } from 'react-native';
-import SpaceBox from '../components/SpaceBox';
-import { TextInputForAuth } from '../styles/AuthStyle';
 import { PropTypes } from 'prop-types';
-import Title from '../components/Title';
 import { useState } from 'react';
+import { Text, View, StyleSheet } from 'react-native';
 import styled from 'styled-components/native';
-import { AuthButton, AuthTextButton } from '../components/auth/AuthButton';
+import { AuthButton } from '../components/auth/AuthButton';
+import SpaceBox from '../components/SpaceBox';
+import Title from '../components/Title';
+import { TextInputForAuth } from '../styles/AuthStyle';
 
-const LoginContent = ({ hideModal }) => {
+const SingUpContent = ({ hideModal }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
   return (
-    <View style={loginStyles.container}>
+    <View style={signUpStyles.container}>
       <ModalHeader>
         <ExitButton onPress={hideModal}>
           <Text>닫기</Text>
         </ExitButton>
       </ModalHeader>
-
       <SpaceBox height={5} />
 
       <AuthFormView>
@@ -40,23 +39,20 @@ const LoginContent = ({ hideModal }) => {
 
         <SpaceBox height={40} />
 
-        <AuthButton title="로그인" width={240} height={45} />
+        <AuthButton title="이메일로 회원가입" width={240} height={45} />
 
         <SpaceBox height={30} />
-
-        <AuthTextButton title="비밀번호를 잊으셨나요?" onPress={() => {}} />
       </AuthFormView>
     </View>
   );
 };
-
-LoginContent.propTypes = {
+SingUpContent.propTypes = {
   hideModal: PropTypes.func,
 };
 
-export default LoginContent;
+export default SingUpContent;
 
-const loginStyles = StyleSheet.create({
+const signUpStyles = StyleSheet.create({
   container: {
     backgroundColor: 'white',
     borderRadius: 20,
