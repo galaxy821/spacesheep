@@ -5,6 +5,8 @@ import ModalNavigator from './AuthNavigator';
 import { KoddiUDOnGothic } from '../styles/DefaultStyle';
 import SplashScreenForSpacesheep from '../screens/SplashScreen';
 import { Animated, StyleSheet, View } from 'react-native';
+import AppNavigator from './AppNavigator';
+import { getToken } from '../modules/Token';
 
 const RootNavigator = () => {
   const [isReady, setIsReady] = useState(false);
@@ -25,9 +27,10 @@ const RootNavigator = () => {
 
   useEffect(() => {
     (async () => {
-      await getFonts();
       try {
-        await new Promise(resolve => setTimeout(resolve, 4300));
+        await new Promise(resolve => setTimeout(resolve, 4500));
+        await getFonts();
+        await getToken();
       } catch (e) {
         // eslint-disable-next-line no-console
         console.log(e);
@@ -67,10 +70,9 @@ const RootNavigator = () => {
       )}
       {isReady && (
         <NavigationContainer>
-          <ModalNavigator />
+          <AppNavigator />
         </NavigationContainer>
       )}
-      {/* <SplashScreenForSpacesheep /> */}
     </View>
   );
 };

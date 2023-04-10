@@ -8,8 +8,10 @@ import Title from '../components/Title';
 import { TextInputForAuth } from '../styles/AuthStyle';
 
 const SingUpContent = ({ hideModal }) => {
+  console.log('SingUpContent');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [rePassword, setRePassword] = useState('');
 
   return (
     <View style={signUpStyles.container}>
@@ -22,18 +24,31 @@ const SingUpContent = ({ hideModal }) => {
 
       <AuthFormView>
         <Title size={30} />
+
         <SpaceBox height={40} />
+
         <TextInputForAuth
           placeholder="이메일"
           value={email}
           onChangeText={setEmail}
           inputMode={'email'}
         />
+
         <SpaceBox height={20} />
+
         <TextInputForAuth
           placeholder="비밀번호"
           value={password}
           onChangeText={setPassword}
+          secureTextEntry={true}
+        />
+
+        <SpaceBox height={20} />
+
+        <TextInputForAuth
+          placeholder="비밀번호 재입력"
+          value={rePassword}
+          onChangeText={setRePassword}
           secureTextEntry={true}
         />
 

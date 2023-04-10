@@ -20,29 +20,20 @@ const LoginGuideScreen = () => {
   const [showAuthModal, setShowAuthModal] = useState(false);
   // const navigation = useNavigation();
   const fadeAnim = useRef(new Animated.Value(0)).current;
-  const slideLoginAnim = useRef(new Animated.Value(1000)).current;
-  const slideSignUpAnim = useRef(new Animated.Value(1000)).current;
+  const slideAnim = useRef(new Animated.Value(1000)).current;
 
-  const showLoginModal = () => {
+  const [currentAuthModal, setCurrentAuthModal] = useState(LOGIN_CONTENT);
+
+  const showContentModal = modalContent => {
+    setCurrentAuthModal(modalContent);
     AuthAnimation.fadeIn(fadeAnim);
-    AuthAnimation.slideIn(slideLoginAnim);
+    AuthAnimation.slideIn(slideAnim);
     setShowAuthModal(true);
   };
 
   const hideLoginModal = () => {
     AuthAnimation.fadeOut(fadeAnim, setShowAuthModal);
-    AuthAnimation.slideOut(slideLoginAnim);
-  };
-
-  const showSignUpModal = () => {
-    AuthAnimation.fadeIn(fadeAnim);
-    AuthAnimation.slideIn(slideSignUpAnim);
-    setShowAuthModal(true);
-  };
-
-  const hideSignUpModal = () => {
-    AuthAnimation.fadeOut(fadeAnim, setShowAuthModal);
-    AuthAnimation.slideOut(slideSignUpAnim);
+    AuthAnimation.slideOut(slideAnim);
   };
 
   return (
@@ -51,15 +42,8 @@ const LoginGuideScreen = () => {
         showAuthModal={showAuthModal}
         hideModal={hideLoginModal}
         fadeAnim={fadeAnim}
-        slideAnim={slideLoginAnim}
-        modalContent={LOGIN_CONTENT}
-      />
-      <AuthModal
-        showAuthModal={showAuthModal}
-        hideModal={hideLoginModal}
-        fadeAnim={fadeAnim}
-        slideAnim={slideLoginAnim}
-        modalContent={SIGNUP_CONTENT}
+        slideAnim={slideAnim}
+        modalContent={currentAuthModal}
       />
 
       <Image style={loginGuideStyles.image} source={sheepKnap}></Image>
@@ -72,7 +56,7 @@ const LoginGuideScreen = () => {
         title="이메일로 로그인"
         backgroundColor={lightThemeColor.primary}
         textColor={'white'}
-        onPress={showLoginModal}
+        onPress={() => showContentModal(LOGIN_CONTENT)}
       ></LoginButton>
 
       <SpaceBox height={15} />
@@ -101,7 +85,7 @@ const LoginGuideScreen = () => {
 
       <AuthTextButton
         title="아직 회원이 아니신가요?"
-        onPress={showSignUpModal}
+        onPress={() => showContentModal(SIGNUP_CONTENT)}
       />
     </View>
   );

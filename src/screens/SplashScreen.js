@@ -1,51 +1,23 @@
 import { StatusBar } from 'expo-status-bar';
-import React, { useEffect } from 'react';
-import { ActivityIndicator, StyleSheet, Animated, Easing } from 'react-native';
+import { useEffect, useRef, useState } from 'react';
+import { ActivityIndicator, StyleSheet, Animated } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import animationLogo from '../../assets/splashAnimation.gif';
 import { Image } from 'expo-image';
+import animationLogo from '../../assets/splashAnimation.gif';
 import Title from '../asset/TitleSVG';
+import { SplashAnimation } from '../animation/SplashAnimation';
 
 const SplashScreenForSpacesheep = () => {
-  const [isLoading, setIsLoading] = React.useState(true);
-  const [showTitle, setShowTitle] = React.useState(false);
-  const fadeAnim = React.useRef(new Animated.Value(0)).current;
-  const fadeOutAnim = React.useRef(new Animated.Value(1)).current;
+  const [isLoading, setIsLoading] = useState(true);
+  const [showTitle, setShowTitle] = useState(false);
+  const fadeAnim = useRef(new Animated.Value(0)).current;
+  const fadeOutAnim = useRef(new Animated.Value(1)).current;
 
   useEffect(() => {
-    Animated.timing(fadeAnim, {
-      toValue: 1,
-      duration: 1000,
-      useNativeDriver: true,
-      easing: Easing.back(),
-      delay: 2500,
-    }).start(() => setShowTitle(true));
-
-    Animated.timing(fadeOutAnim, {
-      toValue: 0,
-      duration: 300,
-      useNativeDriver: true,
-      esing: Easing.back(),
-      delay: 4270,
-    }).start();
+    SplashAnimation.fadeIn(fadeAnim, setShowTitle);
+    SplashAnimation.fadeOut(fadeOutAnim);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
-  const handleLoadStart = () => {
-    // eslint-disable-next-line no-console
-    console.log('Loading...');
-    setIsLoading(true);
-  };
-
-  const handleLoadEnd = () => {
-    // eslint-disable-next-line no-console
-    console.log('Loaded!');
-    setIsLoading(false);
-  };
-
-  const handleLoadError = () => {
-    setIsLoading(false);
-  };
 
   return (
     <SafeAreaView style={styles.container}>
@@ -66,9 +38,9 @@ const SplashScreenForSpacesheep = () => {
             backgroundColor: '#CFB0DD',
             opacity: isLoading ? 0 : 1,
           }}
-          onLoadStart={handleLoadStart}
-          onLoad={handleLoadEnd}
-          onError={handleLoadError}
+          onLoadStart={() => setIsLoading(true)}
+          onLoad={() => setIsLoading(false)}
+          onError={() => setIsLoading(false)}
         />
       </Animated.View>
       <Animated.View style={{ opacity: showTitle ? fadeOutAnim : fadeAnim }}>

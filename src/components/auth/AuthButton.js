@@ -77,7 +77,7 @@ const AuthStyle = {
     width: ${({ width }) => width}px;
     height: ${({ height }) => height}px;
     background-color: ${({ color }) => color || lightThemeColor.primary};
-    border-radius: 10px;
+    border-radius: 20px;
     box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.2);
     justify-content: center;
     align-items: center;
