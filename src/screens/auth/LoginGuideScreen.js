@@ -14,6 +14,8 @@ import GoogleLogo from '../../asset/GoogleLogo';
 import AppleLogo from '../../asset/AppleLogo';
 import Title from '../../components/Title';
 import { LOGIN_CONTENT, SIGNUP_CONTENT } from '../../values/AuthValue';
+// import GoogleAuth from '../../modules/GoogleAuth';
+import GoogleAuth from '../../modules/TestAuth';
 
 const LoginGuideScreen = () => {
   const insets = useSafeAreaInsets();
@@ -87,6 +89,7 @@ const LoginGuideScreen = () => {
         title="아직 회원이 아니신가요?"
         onPress={() => showContentModal(SIGNUP_CONTENT)}
       />
+      <GoogleAuth />
     </View>
   );
 };

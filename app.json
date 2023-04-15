@@ -7,14 +7,19 @@
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
     "assetBundlePatterns": ["**/*"],
+    "scheme": "com.galaxy821.spacesheep",
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.galaxy821.spacesheep",
+      "buildNumber": "1.0.0"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.galaxy821.spacesheep",
+      "versionCode": 1
     },
     "web": {
       "favicon": "./assets/favicon.png"
