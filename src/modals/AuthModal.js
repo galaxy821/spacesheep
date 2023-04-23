@@ -1,9 +1,11 @@
+import { useState } from 'react';
 import { Animated, Modal, TouchableOpacity } from 'react-native';
 import { BlurView } from 'expo-blur';
 import { PropTypes } from 'prop-types';
 import LoginContent from './LoginContent';
-import SingUpContent from './SingUpContent';
-import { LOGIN_CONTENT, SIGNUP_CONTENT } from '../values/AuthValue';
+import SingUpModal from './SingUpContent';
+import { authContent } from '../values/AuthValue';
+import EmialVerfied from './EmailVerified';
 
 const AuthModal = ({ showAuthModal, hideModal, slideAnim, modalContent }) => {
   return (
@@ -32,11 +34,11 @@ const AuthModal = ({ showAuthModal, hideModal, slideAnim, modalContent }) => {
             justifyContent: 'center',
           }}
         >
-          {modalContent === LOGIN_CONTENT ? (
+          {modalContent === authContent.LOGIN_CONTENT ? (
             <LoginContent hideModal={hideModal} />
           ) : (
-            modalContent === SIGNUP_CONTENT && (
-              <SingUpContent hideModal={hideModal} />
+            modalContent === authContent.SIGNUP_CONTENT && (
+              <SingUpModal hideModal={hideModal} />
             )
           )}
         </Animated.View>

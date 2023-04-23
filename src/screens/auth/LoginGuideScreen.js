@@ -13,9 +13,8 @@ import SpaceBox from '../../components/SpaceBox';
 import GoogleLogo from '../../asset/GoogleLogo';
 import AppleLogo from '../../asset/AppleLogo';
 import Title from '../../components/Title';
-import { LOGIN_CONTENT, SIGNUP_CONTENT } from '../../values/AuthValue';
-// import GoogleAuth from '../../modules/GoogleAuth';
 import GoogleAuth from '../../modules/TestAuth';
+import { authContent } from '../../values/AuthValue';
 
 const LoginGuideScreen = () => {
   const insets = useSafeAreaInsets();
@@ -24,7 +23,9 @@ const LoginGuideScreen = () => {
   const fadeAnim = useRef(new Animated.Value(0)).current;
   const slideAnim = useRef(new Animated.Value(1000)).current;
 
-  const [currentAuthModal, setCurrentAuthModal] = useState(LOGIN_CONTENT);
+  const [currentAuthModal, setCurrentAuthModal] = useState(
+    authContent.LOGIN_CONTENT
+  );
 
   const showContentModal = modalContent => {
     setCurrentAuthModal(modalContent);
@@ -58,7 +59,7 @@ const LoginGuideScreen = () => {
         title="이메일로 로그인"
         backgroundColor={lightThemeColor.primary}
         textColor={'white'}
-        onPress={() => showContentModal(LOGIN_CONTENT)}
+        onPress={() => showContentModal(authContent.LOGIN_CONTENT)}
       ></LoginButton>
 
       <SpaceBox height={15} />
@@ -87,7 +88,7 @@ const LoginGuideScreen = () => {
 
       <AuthTextButton
         title="아직 회원이 아니신가요?"
-        onPress={() => showContentModal(SIGNUP_CONTENT)}
+        onPress={() => showContentModal(authContent.SIGNUP_CONTENT)}
       />
       <GoogleAuth />
     </View>

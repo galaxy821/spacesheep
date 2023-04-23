@@ -1,2 +1,6 @@
-export const LOGIN_CONTENT = 'login_content';
-export const SIGNUP_CONTENT = 'signup_content';
+export const authContent = {
+  LOGIN_CONTENT: 'LOGIN_CONTENT',
+  SIGNUP_CONTENT: 'SIGNUP_CONTENT',
+  EMAIL_VERIFIED: 'EMAIL_VERIFIED',
+  SET_NICKNAME: 'SET_NICKNAME',
+};
