@@ -20,19 +20,6 @@ export const TitleStyle = styled.Text`
   font-family: ${FONT_BOLD};
 `;
 
-export const HeightWidthBox = styled.View`
-  height: ${({ height }) => height}px;
-  width: ${({ width }) => width}px;
-`;
-
-export const HeightBox = styled.View`
-  height: ${({ height }) => height}px;
-`;
-
-export const WidthBox = styled.View`
-  width: ${({ width }) => width}px;
-`;
-
 export const SearchBarStyle = {
   View: styled.View`
     flex-direction: column;

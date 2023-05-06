@@ -1,7 +1,7 @@
 import { Modal, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { PropTypes } from 'prop-types';
 import styled from 'styled-components/native';
-import SpaceBox from '../components/SpaceBox';
+import SpaceBox from '../components/common/SpaceBox';
 import { AuthButton } from '../components/auth/AuthButton';
 import { lightThemeColor } from '../styles/Color';
 
@@ -18,12 +18,12 @@ const ConfirmModal = ({ isOpen, onClose, contentText }) => {
       <ModalLayout>
         <View style={confirmStyles.container}>
           <SpaceBox height={10} />
-          <Text>{contentText}</Text>
+          <Text style={confirmStyles.text}>{contentText}</Text>
           <SpaceBox height={30} />
           <AuthButton
             title="확인"
-            width={200}
-            height={45}
+            width={240}
+            height={48}
             color={lightThemeColor.primary}
             onPress={onClose}
           />
@@ -52,9 +52,9 @@ const ModalLayout = styled.View`
 const confirmStyles = StyleSheet.create({
   container: {
     backgroundColor: 'white',
-    borderRadius: 20,
+    borderRadius: 10,
     width: 320,
-    padding: 25,
+    padding: 20,
     alignItems: 'center',
     shadowColor: '#000',
     shadowOffset: {
@@ -64,5 +64,8 @@ const confirmStyles = StyleSheet.create({
     shadowOpacity: 0.25,
     shadowRadius: 4,
     elevation: 5,
+  },
+  text: {
+    fontSize: 16,
   },
 });

@@ -1,6 +1,6 @@
 import { View } from 'react-native';
-import { HeightBox, HeightWidthBox, WidthBox } from '../styles/DefaultStyle';
-import { PropTypes } from 'prop-types';
+import PropTypes from 'prop-types';
+import styled from 'styled-components/native';
 
 const SpaceBox = ({ height, width }) => {
   if (height != null && width != null) {
@@ -18,5 +18,18 @@ SpaceBox.propTypes = {
   height: PropTypes.number,
   width: PropTypes.number,
 };
+
+export const HeightWidthBox = styled.View`
+  height: ${({ height }) => height}px;
+  width: ${({ width }) => width}px;
+`;
+
+export const HeightBox = styled.View`
+  height: ${({ height }) => height}px;
+`;
+
+export const WidthBox = styled.View`
+  width: ${({ width }) => width}px;
+`;
 
 export default SpaceBox;

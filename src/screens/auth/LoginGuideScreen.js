@@ -1,4 +1,4 @@
-// import { useNavigation } from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
 import { useState, useRef } from 'react';
 import { StyleSheet, View, Animated } from 'react-native';
 import { loginWithGoogle } from '../../modules/Auth';
@@ -9,17 +9,18 @@ import { Image } from 'expo-image';
 import sheepKnap from '../../../assets/sheepKnapImg.png';
 import { lightThemeColor } from '../../styles/Color';
 import { AuthTextButton, LoginButton } from '../../components/auth/AuthButton';
-import SpaceBox from '../../components/SpaceBox';
 import GoogleLogo from '../../asset/GoogleLogo';
 import AppleLogo from '../../asset/AppleLogo';
 import Title from '../../components/Title';
 import GoogleAuth from '../../modules/TestAuth';
 import { authContent } from '../../values/AuthValue';
+import { AppRoute } from '../../navigations/routes';
+import SpaceBox from '../../components/common/SpaceBox';
 
 const LoginGuideScreen = () => {
   const insets = useSafeAreaInsets();
   const [showAuthModal, setShowAuthModal] = useState(false);
-  // const navigation = useNavigation();
+  const navigation = useNavigation();
   const fadeAnim = useRef(new Animated.Value(0)).current;
   const slideAnim = useRef(new Animated.Value(1000)).current;
 
@@ -68,7 +69,7 @@ const LoginGuideScreen = () => {
         title="Google로 로그인"
         backgroundColor={'white'}
         textColor={'black'}
-        onPress={loginWithGoogle}
+        // onPress={loginWithGoogle}
       >
         <GoogleLogo />
       </LoginButton>
@@ -88,8 +89,10 @@ const LoginGuideScreen = () => {
 
       <AuthTextButton
         title="아직 회원이 아니신가요?"
-        onPress={() => showContentModal(authContent.SIGNUP_CONTENT)}
+        // onPress={() => showContentModal(authContent.SIGNUP_CONTENT)}
+        onPress={() => navigation.navigate(AppRoute.SIGN_UP)}
       />
+      <SpaceBox height={30} />
       <GoogleAuth />
     </View>
   );

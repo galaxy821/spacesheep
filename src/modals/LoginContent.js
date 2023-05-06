@@ -1,5 +1,5 @@
 import { Text, View, StyleSheet } from 'react-native';
-import SpaceBox from '../components/SpaceBox';
+import SpaceBox from '../components/common/SpaceBox';
 import { TextInputForAuth } from '../styles/AuthStyle';
 import { PropTypes } from 'prop-types';
 import Title from '../components/Title';

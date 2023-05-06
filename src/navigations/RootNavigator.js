@@ -7,6 +7,7 @@ import SplashScreenForSpacesheep from '../screens/SplashScreen';
 import { Animated, StyleSheet, View } from 'react-native';
 import AppNavigator from './AppNavigator';
 import { getToken } from '../modules/Token';
+import AuthModalNavigator from './AuthNavigator';
 
 const RootNavigator = () => {
   const [isReady, setIsReady] = useState(false);
@@ -70,7 +71,8 @@ const RootNavigator = () => {
       )}
       {isReady && (
         <NavigationContainer>
-          <AppNavigator />
+          {/* <AppNavigator /> */}
+          <AuthModalNavigator />
         </NavigationContainer>
       )}
     </View>

@@ -13,27 +13,37 @@ export const loginWithGoogle = async () => {
     });
 };
 
-export const signUpWithEmail = async (email, password) => {
-  const response = await Auth.post('/login/signup', {
+export const signUpWithEmail = async email => {
+  const response = await Auth.post('/login/signup/email', {
     email,
-    password,
   })
     .then(function (response) {
       // eslint-disable-next-line no-console
       console.log(response);
       if (response.status == 200) {
-        alert('회원가입이 완료되었습니다.');
-        try {
-          // 토큰 저장
-          AsyncStorage.setItem('token', response.data.token);
-          return response.status;
-        } catch (error) {
-          // eslint-disable-next-line no-console
-          console.log(error);
-          return 500;
-        }
+        alert('이메일 인증메일 전송 성공...!');
       } else if (response.status == 401) {
         alert('이미 가입된 이메일입니다.');
+        return response.status;
+      }
+    })
+    .catch(function (error) {
+      // eslint-disable-next-line no-console
+      console.log(error);
+      return 500;
+    });
+};
+
+export const getUserStatus = async email => {
+  const response = await Auth.get('/getUserStatus', {
+    email,
+  })
+    .then(function (response) {
+      // eslint-disable-next-line no-console
+      console.log(response);
+      if (response.status == 200) {
+        alert('이메일 인증메일 확인...!');
+      } else if (response.status == 401) {
         return response.status;
       }
     })

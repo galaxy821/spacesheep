@@ -1,7 +1,7 @@
 import styled from 'styled-components/native';
 import { lightThemeColor } from '../../styles/Color';
 import { PropTypes } from 'prop-types';
-import SpaceBox from '../SpaceBox';
+import SpaceBox from '../common/SpaceBox';
 import { TouchableOpacity } from 'react-native';
 import { Text } from 'react-native';
 
@@ -77,13 +77,13 @@ const AuthStyle = {
     width: ${({ width }) => width}px;
     height: ${({ height }) => height}px;
     background-color: ${({ color }) => color || lightThemeColor.primary};
-    border-radius: 20px;
-    box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    /* box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.2); */
     justify-content: center;
     align-items: center;
   `,
   Text: styled.Text`
-    font-size: 14px;
+    font-size: 16px;
   `,
   LoginButton: styled.TouchableOpacity`
     width: ${({ width }) => width}px;

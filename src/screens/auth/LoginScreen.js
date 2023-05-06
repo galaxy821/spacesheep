@@ -1,9 +1,8 @@
 import { useNavigation } from '@react-navigation/native';
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
-import SearchBar from '../../components/SearchBar';
+
 import styled from 'styled-components/native';
 import Title from '../../components/Title';
-import SpaceBox from '../../components/SpaceBox';
 import React from 'react';
 import { TextInputForAuth } from '../../styles/AuthStyle';
 import AuthButton from '../../components/auth/AuthButton';
@@ -11,6 +10,7 @@ import {
   SafeAreaView,
   useSafeAreaInsets,
 } from 'react-native-safe-area-context';
+import SpaceBox from '../../components/common/SpaceBox';
 
 const LoginScreen = () => {
   const insets = useSafeAreaInsets();
