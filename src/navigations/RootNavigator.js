@@ -18,6 +18,15 @@ const RootNavigator = () => {
     await Font.loadAsync(KoddiUDOnGothic);
   };
 
+  const getToken = async () => {
+    const token = await getToken();
+    if (token) {
+      return true;
+    } else {
+      return false;
+    }
+  };
+
   const fadeOutAnimation = () => {
     Animated.timing(fadeAnim, {
       toValue: 0,

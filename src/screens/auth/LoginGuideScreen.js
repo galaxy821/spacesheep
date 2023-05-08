@@ -93,7 +93,7 @@ const LoginGuideScreen = () => {
         onPress={() => navigation.navigate(AppRoute.SIGN_UP)}
       />
       <SpaceBox height={30} />
-      <GoogleAuth />
+      {/* <GoogleAuth /> */}
     </View>
   );
 };

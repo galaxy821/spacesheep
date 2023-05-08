@@ -10,5 +10,5 @@ export const signUpContent = {
   SET_EMAIL: 'setEmail',
   EMAIL_VERIFIED: 'emailVerified',
   SET_PASSWORD: 'setPassword',
-  SET_NICKNAME: 'setNickname',
+  SET_PROFILE: 'setProfile',
 };

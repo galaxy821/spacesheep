@@ -10,10 +10,11 @@ import {
 import { Feather } from '@expo/vector-icons';
 import SpaceBox from '../../components/common/SpaceBox';
 import { PropTypes } from 'prop-types';
-import { useNavigation } from '@react-navigation/native';
-import { useState } from 'react';
+// import { useNavigation } from '@react-navigation/native';
+import { useRef, useState, useEffect } from 'react';
 import { signUpContent } from '../../values/AuthValue';
 import ViewBox from '../../components/common/ViewBox';
+// import { sendEmailForAuth } from '../../modules/Auth';
 
 const emailRegExp =
   /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
@@ -25,12 +26,14 @@ const SetEmailContent = ({
   setCurrentErrorMessage,
   setCurrentSignUpContent,
 }) => {
-  const navigation = useNavigation();
+  // const navigation = useNavigation();
 
   const [textAnim] = useState(new Animated.Value(1));
   const [inputAnim] = useState(new Animated.Value(1));
 
   const windowWidth = Dimensions.get('window').width;
+
+  const textInputRef = useRef(null);
 
   const fadeOut = () => {
     Animated.stagger(300, [
@@ -61,17 +64,25 @@ const SetEmailContent = ({
       return;
     } else {
       // post /auth/signup/email
-
+      // const code = sendEmailForAuth(email);
       const code = 200;
+
       if (code === 200) {
-        // setCurrentContent(authContent.EMAIL_VERIFIED);
         fadeOut();
-        // setCurrentSignUpContent(signUpContent.EMAIL_VERIFIED);
-      } else {
-        //
+      } else if (code === 401) {
+        // 401: 이미 가입된 이메일
+        setCurrentErrorMessage('이미 가입된 이메일입니다.');
+        setOpenModal(true);
+        return;
       }
     }
   };
+
+  useEffect(() => {
+    if (textInputRef.current) {
+      textInputRef.current.focus();
+    }
+  }, []);
 
   return (
     <View style={signUpStyles.container}>
@@ -98,6 +109,8 @@ const SetEmailContent = ({
           onChangeText={setEmail}
           inputMode={'email'}
           style={signUpStyles.input}
+          ref={textInputRef}
+          onSubmitEditing={onSendEmail}
         />
 
         <TouchableOpacity style={signUpStyles.nextButton} onPress={onSendEmail}>
@@ -121,7 +134,7 @@ export default SetEmailContent;
 const signUpStyles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'start',
+    justifyContent: 'flex-start',
     alignItems: 'center',
     backgroundColor: 'white',
   },

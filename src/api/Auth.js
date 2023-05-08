@@ -7,4 +7,14 @@ const Auth = axios.create({
   },
 });
 
+export const getUpdateAuth = token => {
+  return axios.create({
+    baseURL: 'https://spacesheep.co.kr',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`,
+    },
+  });
+};
+
 export default Auth;

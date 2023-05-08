@@ -1,24 +1,21 @@
 import { useNavigation } from '@react-navigation/native';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import {
-  Button,
   StyleSheet,
-  Text,
   View,
-  TextInput,
   TouchableOpacity,
-  Animated,
+  TouchableWithoutFeedback,
+  Keyboard,
 } from 'react-native';
 import SpaceBox from '../../components/common/SpaceBox';
-import styled from 'styled-components/native';
-import { TextInputForAuth } from '../../styles/AuthStyle';
-import { AuthButton } from '../../components/auth/AuthButton';
 import { Feather } from '@expo/vector-icons';
 import ConfirmModal from '../../modals/ConfirmModal';
 import SetEmailContent from '../../modals/signup/SetEmailContent';
 import { signUpContent } from '../../values/AuthValue';
 import VerifiedEmailContent from '../../modals/signup/VerifiedEmailContent';
 import SetPasswordContent from '../../modals/signup/SetPasswordContent';
+import SetProfileContent from '../../modals/signup/SetProfileContent';
+import ErrorContent from './ErrorContent';
 
 const SignUpScreen = () => {
   const [isOpenMoadl, setOpenModal] = useState(false);
@@ -27,68 +24,68 @@ const SignUpScreen = () => {
     signUpContent.SET_EMAIL
   );
   const [email, setEmail] = useState('');
-  const [fadeAnimation, setFadeAnimation] = useState(new Animated.Value(0));
-
-  useEffect(() => {
-    Animated.timing(fadeAnimation, {
-      toValue: 1,
-      duration: 1000,
-      useNativeDriver: true,
-    }).start();
-  });
 
   const navigation = useNavigation();
 
   return (
-    <View style={signUpStyles.container}>
-      <ConfirmModal
-        isOpen={isOpenMoadl}
-        onClose={() => setOpenModal(false)}
-        contentText={currentErrorMessage}
-      />
+    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+      <View style={signUpStyles.container}>
+        <ConfirmModal
+          isOpen={isOpenMoadl}
+          onClose={() => setOpenModal(false)}
+          contentText={currentErrorMessage}
+        />
 
-      <View style={signUpStyles.headerContainer}>
-        <TouchableOpacity onPress={() => navigation.goBack()}>
-          <Feather name="x" size={24} color="black" />
-        </TouchableOpacity>
+        <View style={signUpStyles.headerContainer}>
+          <TouchableOpacity onPress={() => navigation.goBack()}>
+            <Feather name="x" size={24} color="black" />
+          </TouchableOpacity>
+        </View>
+
+        {currentSignUpContent === signUpContent.SET_EMAIL ? (
+          <SetEmailContent
+            email={email}
+            setEmail={setEmail}
+            setOpenModal={setOpenModal}
+            setCurrentErrorMessage={setCurrentErrorMessage}
+            setCurrentSignUpContent={setCurrentSignUpContent}
+          />
+        ) : currentSignUpContent === signUpContent.EMAIL_VERIFIED ? (
+          <VerifiedEmailContent
+            email={email}
+            setCurrentSignUpContent={setCurrentSignUpContent}
+          />
+        ) : currentSignUpContent === signUpContent.SET_PASSWORD ? (
+          <SetPasswordContent
+            email={email}
+            setCurrentSignUpContent={setCurrentSignUpContent}
+            setOpenModal={setOpenModal}
+            setCurrentErrorMessage={setCurrentErrorMessage}
+          />
+        ) : currentSignUpContent === signUpContent.SET_PROFILE ? (
+          <SetProfileContent
+            navigation={navigation}
+            setCurrentErrorMessage={setCurrentErrorMessage}
+            setOpenModal={setOpenModal}
+          />
+        ) : (
+          <ErrorContent />
+        )}
+
+        <SpaceBox height={30} />
+        {/* <View style={signUpStyles.separator} /> */}
       </View>
-
-      {currentSignUpContent === signUpContent.SET_EMAIL ? (
-        <SetEmailContent
-          email={email}
-          setEmail={setEmail}
-          setOpenModal={setOpenModal}
-          setCurrentErrorMessage={setCurrentErrorMessage}
-          setCurrentSignUpContent={setCurrentSignUpContent}
-        />
-      ) : currentSignUpContent === signUpContent.EMAIL_VERIFIED ? (
-        <VerifiedEmailContent
-          email={email}
-          setCurrentSignUpContent={setCurrentSignUpContent}
-        />
-      ) : currentSignUpContent === signUpContent.SET_PASSWORD ? (
-        <SetPasswordContent
-          email={email}
-          setCurrentSignUpContent={setCurrentSignUpContent}
-        />
-      ) : (
-        // <SetNicknameContent
-        //   email={email}
-        //   setCurrentSignUpContent={setCurrentSignUpContent}
-        // />
-        <></>
-      )}
-
-      <SpaceBox height={30} />
-      {/* <View style={signUpStyles.separator} /> */}
-    </View>
+    </TouchableWithoutFeedback>
   );
 };
 
 const signUpStyles = StyleSheet.create({
   container: {
+    display: 'flex',
     flex: 1,
-    justifyContent: 'start',
+    justifyContent: 'flex-start',
+    textAlign: 'start',
+
     alignItems: 'center',
     padding: 22,
     backgroundColor: 'white',
@@ -109,7 +106,7 @@ const signUpStyles = StyleSheet.create({
     width: '100%',
     paddingTop: 15,
     paddingLeft: 10,
-    alignItems: 'start',
+    alignItem: 'start',
   },
   input: {
     // width: '100%',
@@ -137,30 +134,3 @@ const signUpStyles = StyleSheet.create({
 });
 
 export default SignUpScreen;
-
-const TextForSignUp = styled.Text`
-  font-size: 28px;
-  font-weight: bold;
-  margin-bottom: 20px;
-`;
-
-const ModalHeader = styled.View`
-  width: 100%;
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-end;
-  align-items: start;
-  margin-bottom: 10px;
-`;
-
-const ExitButton = styled.TouchableOpacity``;
-
-const AuthFormView = styled.View`
-  display: flex;
-  position: relative;
-  width: 250px;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  background-color: #fff;
-`;

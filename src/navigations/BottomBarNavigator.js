@@ -1,4 +1,4 @@
-import { BottomBarRoute } from './routes';
+import { BottomBarRoute, AuthRoutes } from './routes';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import HomeScreen from '../screens/home/HomeScreen';
 import AuthRequired from './AuthRequired';
@@ -17,6 +17,7 @@ import PostMessageOutlinedIcon from '../components/icons/PostMessageOutlinedIcon
 import ProfileFilledIcon from '../components/icons/ProfileFilledIcon';
 import ProfileOutlinedIcon from '../components/icons/ProfileOutlinedIcon';
 import { TAB_BAR_HEIGHT } from '../values/DefaultValue';
+import LoginGuideScreen from '../screens/auth/LoginGuideScreen';
 
 const BottomTab = createBottomTabNavigator();
 

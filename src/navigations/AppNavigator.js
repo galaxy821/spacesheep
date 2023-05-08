@@ -3,7 +3,7 @@ import NoticeScreen from '../screens/home/NoticeScreen';
 import SearchResultScreen from '../screens/home/SearchResultScreen';
 import SpaceScreen from '../screens/space/SpaceScreen';
 import BottomBarNavigator from './BottomBarNavigator';
-import { AppRoute } from './routes';
+import { AppRoute, AuthRoutes } from './routes';
 import CreateSpaceScreen from '../screens/profile/CreateSpaceScreen';
 import LoginScreen from '../screens/auth/LoginScreen';
 import SignUpScreen from '../screens/auth/SignUpScreen';
@@ -14,6 +14,7 @@ import VerifiedEmailScreen from '../screens/auth/VerifiedEmailScreen';
 import SpaceSettingScreen from '../screens/space/SpaceSettingScreen';
 import WelcomeScreen from '../screens/auth/WelcomeScreen';
 import ProfileSettingScreen from '../screens/profile/ProfileSettingScreen';
+import LoginGuideScreen from '../screens/auth/LoginGuideScreen';
 
 const AppStack = createNativeStackNavigator();
 

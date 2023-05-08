@@ -16,7 +16,11 @@ function ModalNavigator() {
     >
       <ModalStack.Screen name="Main" component={AppNavigator} />
       <ModalStack.Screen name={AppRoute.LOGIN} component={LoginScreen} />
-      <ModalStack.Screen name={AppRoute.SIGN_UP} component={SignUpScreen} />
+      <ModalStack.Screen
+        name={AppRoute.SIGN_UP}
+        component={SignUpScreen}
+        options={{ gestureEnabled: false }}
+      />
     </ModalStack.Navigator>
   );
 }

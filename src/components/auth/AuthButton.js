@@ -61,7 +61,10 @@ LoginButton.propTypes = {
 
 export const AuthTextButton = ({ title, onPress }) => {
   return (
-    <TouchableOpacity onPress={onPress}>
+    <TouchableOpacity
+      onPress={onPress}
+      hitSlop={{ top: 30, left: 30, bottom: 30, right: 30 }}
+    >
       <Text style={{ textDecorationLine: 'underline' }}>{title}</Text>
     </TouchableOpacity>
   );

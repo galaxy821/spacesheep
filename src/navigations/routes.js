@@ -25,6 +25,7 @@ export const BottomBarRoute = {
 };
 
 export const AuthRoutes = {
+  LOGIN_GUIDE: 'LoginGuide',
   FIND_PASSWORD: 'FindPassword',
   LOGIN: 'Login',
   SET_PROFILE: 'SetProfile',
