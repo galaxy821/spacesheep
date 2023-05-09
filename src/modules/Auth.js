@@ -15,7 +15,7 @@ export const loginWithGoogle = async () => {
 };
 
 export const sendEmailForAuth = async email => {
-  const response = await Auth.post('/login/signup/email', {
+  const response = await Auth.post('/auth/email-verified', {
     email,
   })
     .then(function (response) {
@@ -36,7 +36,7 @@ export const sendEmailForAuth = async email => {
 };
 
 export const getUserStatus = async email => {
-  const response = await Auth.get('/getUserStatus', {
+  const response = await Auth.get('/auth/getUserStatus', {
     email,
   })
     .then(function (response) {
@@ -90,7 +90,7 @@ export const setNickname = async nickname => {
   const token = await getToken();
   if (token !== null) {
     const response = await getUpdateAuth(token)
-      .post('/auth/setNickname', {
+      .patch('/auth/setNickname', {
         nickname,
       })
       .then(function (response) {

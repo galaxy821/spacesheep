@@ -17,7 +17,6 @@ import PostMessageOutlinedIcon from '../components/icons/PostMessageOutlinedIcon
 import ProfileFilledIcon from '../components/icons/ProfileFilledIcon';
 import ProfileOutlinedIcon from '../components/icons/ProfileOutlinedIcon';
 import { TAB_BAR_HEIGHT } from '../values/DefaultValue';
-import LoginGuideScreen from '../screens/auth/LoginGuideScreen';
 
 const BottomTab = createBottomTabNavigator();
 

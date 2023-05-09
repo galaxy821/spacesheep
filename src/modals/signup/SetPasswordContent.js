@@ -1,20 +1,18 @@
 import SpaceBox from '../../components/common/SpaceBox';
-import { TextInputForAuth } from '../../styles/AuthStyle';
 import { useState, useEffect, useRef } from 'react';
 import { PropTypes } from 'prop-types';
 import { Feather } from '@expo/vector-icons';
-import { AsyncStorage } from '@react-native-async-storage/async-storage';
 import {
   TextInput,
   TouchableOpacity,
   Text,
   View,
   StyleSheet,
-  Alert,
   Animated,
 } from 'react-native';
-import { signUpForUser } from '../../modules/Auth';
 import { signUpContent } from '../../values/AuthValue';
+import { authStore } from '../../store/Auth';
+import { useSetRecoilState } from 'recoil';
 import { setToken } from '../../modules/Token';
 
 const SetPasswordContent = ({
@@ -30,6 +28,8 @@ const SetPasswordContent = ({
 
   const passwordRef = useRef(null);
   const confirmPasswordRef = useRef(null);
+
+  const setAccessToken = useSetRecoilState(authStore);
 
   const fadeIn = () => {
     Animated.timing(viewAnim, {
@@ -63,7 +63,8 @@ const SetPasswordContent = ({
       // const result = signUpForUser(email, password);
       const result = true;
       if (result) {
-        setToken('testToken');
+        setToken('token_for_test');
+        setAccessToken('token_for_test');
         fadeOut();
       } else {
         setCurrentErrorMessage('회원가입에 실패했습니다.');
@@ -128,6 +129,8 @@ const SetPasswordContent = ({
 SetPasswordContent.propTypes = {
   email: PropTypes.string.isRequired,
   setCurrentSignUpContent: PropTypes.func,
+  setCurrentErrorMessage: PropTypes.func,
+  setOpenModal: PropTypes.func,
 };
 
 export default SetPasswordContent;

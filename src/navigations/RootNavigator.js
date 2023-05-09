@@ -1,29 +1,29 @@
 import { NavigationContainer } from '@react-navigation/native';
 import { useEffect, useState } from 'react';
 import * as Font from 'expo-font';
-import ModalNavigator from './AuthNavigator';
 import { KoddiUDOnGothic } from '../styles/DefaultStyle';
 import SplashScreenForSpacesheep from '../screens/SplashScreen';
 import { Animated, StyleSheet, View } from 'react-native';
-import AppNavigator from './AppNavigator';
 import { getToken } from '../modules/Token';
 import AuthModalNavigator from './AuthNavigator';
+import { authStore } from '../store/Auth';
+import { RecoilRoot, useRecoilState } from 'recoil';
 
 const RootNavigator = () => {
   const [isReady, setIsReady] = useState(false);
   const [showSplash, setShowSplash] = useState(true);
   const fadeAnim = new Animated.Value(1);
 
+  const [accessToken, setAccessToken] = useRecoilState(authStore);
+
   const getFonts = async () => {
     await Font.loadAsync(KoddiUDOnGothic);
   };
 
-  const getToken = async () => {
+  const loadToken = async () => {
     const token = await getToken();
     if (token) {
-      return true;
-    } else {
-      return false;
+      setAccessToken(token);
     }
   };
 
@@ -40,7 +40,7 @@ const RootNavigator = () => {
       try {
         await new Promise(resolve => setTimeout(resolve, 4500));
         await getFonts();
-        await getToken();
+        await loadToken();
       } catch (e) {
         // eslint-disable-next-line no-console
         console.log(e);
@@ -48,6 +48,7 @@ const RootNavigator = () => {
         setIsReady(true);
       }
     })();
+    //eslint-disable-next-line
   }, []);
 
   useEffect(() => {

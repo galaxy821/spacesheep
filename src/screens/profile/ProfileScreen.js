@@ -3,11 +3,16 @@ import SpaceBox from '../../components/common/SpaceBox';
 import { removeToken } from '../../modules/Token';
 import { useNavigation } from '@react-navigation/native';
 import { BottomBarRoute } from '../../navigations/routes';
+import { authStore } from '../../store/Auth';
+import { useSetRecoilState } from 'recoil';
 
 function ProfileScreen() {
+  const setAccessToken = useSetRecoilState(authStore);
   const navigation = useNavigation();
+
   const logout = async () => {
     removeToken();
+    setAccessToken(null);
     navigation.reset({
       index: 0,
       routes: [{ name: BottomBarRoute.HOME }],

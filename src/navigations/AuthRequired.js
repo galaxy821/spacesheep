@@ -1,20 +1,19 @@
 import LoginGuideScreen from '../screens/auth/LoginGuideScreen';
 import PropTypes from 'prop-types';
-import { getToken } from '../modules/Token';
-import { useEffect, useState } from 'react';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import { useNavigation } from '@react-navigation/native';
-import { AuthRoutes } from './routes';
+import { useRecoilValue } from 'recoil';
+import { authStore } from '../store/Auth';
+// import { useRecoilValue } from '../../node_modules/recoil/index.d';
+// import { authStore } from '../store/Auth';
 
 const AuthRequired = ({ children }) => {
-  const [data, setData] = useState(async () => {
-    return await getToken();
-  });
-
-  if (data === null) {
-    return children;
-  } else {
+  const token = useRecoilValue(authStore);
+  // const token = null;
+  if (token === null) {
+    console.log('token is null');
     return <LoginGuideScreen />;
+  } else {
+    console.log('authRequired', token);
+    return children;
   }
 };
 

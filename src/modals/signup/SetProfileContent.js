@@ -6,18 +6,21 @@ import {
   TextInput,
   TouchableOpacity,
   View,
+  BackHandler,
 } from 'react-native';
 import { useEffect, useRef, useState } from 'react';
 import { Feather } from '@expo/vector-icons';
 import { PropTypes } from 'prop-types';
-import { BottomBarRoute } from '../../navigations/routes';
+import { signUpContent } from '../../values/AuthValue';
 
 const SetProfileContent = ({
+  nickname,
+  setNickName,
   setCurrentErrorMessage,
   setOpenModal,
-  navigation,
+  setShowExitButton,
+  setCurrentSignUpContent,
 }) => {
-  const [nickname, setNickName] = useState('');
   const nicknameRef = useRef(null);
 
   const [viewAnim] = useState(new Animated.Value(0));
@@ -33,11 +36,10 @@ const SetProfileContent = ({
 
       const result = true;
       if (result) {
-        navigation.goBack();
-        navigation.reset({
-          index: 0,
-          routes: [{ name: BottomBarRoute.HOME }],
-        });
+        fadeOut();
+      } else {
+        setCurrentErrorMessage('중복되는 닉네임입니다.');
+        setOpenModal(true);
       }
     }
   };
@@ -50,11 +52,30 @@ const SetProfileContent = ({
     }).start();
   };
 
+  const fadeOut = () => {
+    Animated.timing(viewAnim, {
+      toValue: 0,
+      duration: 300,
+      useNativeDriver: true,
+    }).start(() => {
+      setCurrentSignUpContent(signUpContent.WELCOME);
+    });
+  };
+
   useEffect(() => {
+    const backAction = () => {
+      /**nothing event when backbutton press */
+      return true;
+    };
+
+    BackHandler.addEventListener('hardwareBackPress', backAction);
+
+    setShowExitButton(false);
     fadeIn();
-    if (nickname.current) {
+    if (nicknameRef.current) {
       nicknameRef.current.focus();
     }
+    //eslint-disable-next-line
   }, []);
 
   return (
@@ -80,9 +101,13 @@ const SetProfileContent = ({
 };
 
 SetProfileContent.propTypes = {
+  nickname: PropTypes.string.isRequired,
+  setNickName: PropTypes.func.isRequired,
   setCurrentErrorMessage: PropTypes.func.isRequired,
   setOpenModal: PropTypes.func.isRequired,
-  navigation: PropTypes.object,
+  //   navigation: PropTypes.object,
+  setShowExitButton: PropTypes.func.isRequired,
+  setCurrentSignUpContent: PropTypes.func.isRequired,
 };
 
 const styles = StyleSheet.create({

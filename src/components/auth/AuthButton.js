@@ -65,7 +65,9 @@ export const AuthTextButton = ({ title, onPress }) => {
       onPress={onPress}
       hitSlop={{ top: 30, left: 30, bottom: 30, right: 30 }}
     >
-      <Text style={{ textDecorationLine: 'underline' }}>{title}</Text>
+      <Text style={{ textDecorationLine: 'underline', fontSize: 14 }}>
+        {title}
+      </Text>
     </TouchableOpacity>
   );
 };

@@ -3,18 +3,12 @@ import NoticeScreen from '../screens/home/NoticeScreen';
 import SearchResultScreen from '../screens/home/SearchResultScreen';
 import SpaceScreen from '../screens/space/SpaceScreen';
 import BottomBarNavigator from './BottomBarNavigator';
-import { AppRoute, AuthRoutes } from './routes';
+import { AppRoute } from './routes';
 import CreateSpaceScreen from '../screens/profile/CreateSpaceScreen';
-import LoginScreen from '../screens/auth/LoginScreen';
-import SignUpScreen from '../screens/auth/SignUpScreen';
 import MomentContentScreen from '../screens/moment/MomentContentScreen';
 import FindPasswordScreen from '../screens/auth/FindPasswordScreen';
-import SetProfileScreen from '../screens/auth/SetProfileScreen';
-import VerifiedEmailScreen from '../screens/auth/VerifiedEmailScreen';
 import SpaceSettingScreen from '../screens/space/SpaceSettingScreen';
-import WelcomeScreen from '../screens/auth/WelcomeScreen';
 import ProfileSettingScreen from '../screens/profile/ProfileSettingScreen';
-import LoginGuideScreen from '../screens/auth/LoginGuideScreen';
 
 const AppStack = createNativeStackNavigator();
 
@@ -47,21 +41,12 @@ function AppNavigator() {
         name={AppRoute.SEARCH_RESULT}
         component={SearchResultScreen}
       />
-      <AppStack.Screen
-        name={AppRoute.SET_PROFILE}
-        component={SetProfileScreen}
-      />
       {/* <AppStack.Screen name={AppRoute.SIGN_UP} component={SignUpScreen} /> */}
       <AppStack.Screen name={AppRoute.SPACE} component={SpaceScreen} />
       <AppStack.Screen
         name={AppRoute.SPACE_SETTING}
         component={SpaceSettingScreen}
       />
-      <AppStack.Screen
-        name={AppRoute.VERIFIED_EMAIL}
-        component={VerifiedEmailScreen}
-      />
-      <AppStack.Screen name={AppRoute.WELCOME} component={WelcomeScreen} />
     </AppStack.Navigator>
   );
 }

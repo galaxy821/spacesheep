@@ -16,14 +16,17 @@ import VerifiedEmailContent from '../../modals/signup/VerifiedEmailContent';
 import SetPasswordContent from '../../modals/signup/SetPasswordContent';
 import SetProfileContent from '../../modals/signup/SetProfileContent';
 import ErrorContent from './ErrorContent';
+import WelcomeContent from '../../modals/signup/WelcomeContent';
 
 const SignUpScreen = () => {
   const [isOpenMoadl, setOpenModal] = useState(false);
+  const [showExitButton, setShowExitButton] = useState(true);
   const [currentErrorMessage, setCurrentErrorMessage] = useState('');
   const [currentSignUpContent, setCurrentSignUpContent] = useState(
     signUpContent.SET_EMAIL
   );
   const [email, setEmail] = useState('');
+  const [nickname, setNickName] = useState('');
 
   const navigation = useNavigation();
 
@@ -37,9 +40,11 @@ const SignUpScreen = () => {
         />
 
         <View style={signUpStyles.headerContainer}>
-          <TouchableOpacity onPress={() => navigation.goBack()}>
-            <Feather name="x" size={24} color="black" />
-          </TouchableOpacity>
+          {showExitButton && (
+            <TouchableOpacity onPress={() => navigation.goBack()}>
+              <Feather name="x" size={24} color="black" />
+            </TouchableOpacity>
+          )}
         </View>
 
         {currentSignUpContent === signUpContent.SET_EMAIL ? (
@@ -64,10 +69,16 @@ const SignUpScreen = () => {
           />
         ) : currentSignUpContent === signUpContent.SET_PROFILE ? (
           <SetProfileContent
+            nickname={nickname}
+            setNickName={setNickName}
             navigation={navigation}
             setCurrentErrorMessage={setCurrentErrorMessage}
             setOpenModal={setOpenModal}
+            setShowExitButton={setShowExitButton}
+            setCurrentSignUpContent={setCurrentSignUpContent}
           />
+        ) : currentSignUpContent === signUpContent.WELCOME ? (
+          <WelcomeContent nickname={nickname} />
         ) : (
           <ErrorContent />
         )}
@@ -93,34 +104,26 @@ const signUpStyles = StyleSheet.create({
   textInputContainer: {
     display: 'flex',
     flexDirection: 'row',
-    // flexDirection: 'column',
     width: '100%',
-    // justifyContent: 'start',
-    // alignItems: 'start',
-    // flexWrap: 'nowrap',
   },
   headerContainer: {
     display: 'flex',
-    // flexDirection: 'column',
     flexDirection: 'row',
     width: '100%',
+    height: 42,
     paddingTop: 15,
-    paddingLeft: 10,
+    paddingLeft: 0,
     alignItem: 'start',
   },
   input: {
-    // width: '100%',
     flex: 1,
     height: 40,
-    // borderWidth: 1,
     borderBottomWidth: 1,
     borderColor: '#999',
     borderRadius: 5,
     padding: 10,
   },
   nextButton: {
-    // padding: 10,
-    // marginTop: 20,
     marginStart: 10,
     marginEnd: 10,
   },

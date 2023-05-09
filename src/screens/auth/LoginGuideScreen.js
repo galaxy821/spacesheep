@@ -12,7 +12,7 @@ import { AuthTextButton, LoginButton } from '../../components/auth/AuthButton';
 import GoogleLogo from '../../asset/GoogleLogo';
 import AppleLogo from '../../asset/AppleLogo';
 import Title from '../../components/Title';
-import GoogleAuth from '../../modules/TestAuth';
+// import GoogleAuth from '../../modules/TestAuth';
 import { authContent } from '../../values/AuthValue';
 import { AppRoute } from '../../navigations/routes';
 import SpaceBox from '../../components/common/SpaceBox';
