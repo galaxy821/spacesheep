@@ -20,6 +20,7 @@ const NoticeScreen = () => {
         </TouchableOpacity>
       ),
     });
+    //eslint-disable-next-line
   }, [navigation]);
 
   return (

@@ -1,17 +1,23 @@
 import { Dimensions, Image } from 'react-native';
 import { SpaceThumbnailStyle } from '../styles/DefaultStyle';
 import { PropTypes } from 'prop-types';
+import { useNavigation } from '@react-navigation/native';
+import { AppRoute } from '../navigations/routes';
 
 const screenWidth = (Dimensions.get('window').width - 60) / 3;
 
 const SpaceThumbnail = ({ space }) => {
   const { id, name, image, description, color } = space;
+  const navigation = useNavigation();
 
   return (
     <SpaceThumbnailStyle.Button
       activeOpacity={0.75}
       onPress={() => {
-        console.log('SpaceThumbnail pressed');
+        navigation.navigate(AppRoute.SPACE, {
+          id: id,
+          name: name,
+        });
       }}
     >
       <SpaceThumbnailStyle.Box screenWidth={screenWidth}>

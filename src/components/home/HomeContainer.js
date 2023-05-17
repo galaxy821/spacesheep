@@ -28,6 +28,7 @@ const HomeContainer = ({ safeArea }) => {
       ListHeaderComponent={HomeScreenHeader}
       showsVerticalScrollIndicator={false}
       numColumns={NUM_OF_COLUMNS}
+    
     />
   );
 };

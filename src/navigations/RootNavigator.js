@@ -38,9 +38,9 @@ const RootNavigator = () => {
   useEffect(() => {
     (async () => {
       try {
-        await new Promise(resolve => setTimeout(resolve, 4500));
         await getFonts();
         await loadToken();
+        await new Promise(resolve => setTimeout(resolve, 4500));
       } catch (e) {
         // eslint-disable-next-line no-console
         console.log(e);

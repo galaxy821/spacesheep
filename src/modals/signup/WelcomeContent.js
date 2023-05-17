@@ -1,11 +1,14 @@
 import { Feather } from '@expo/vector-icons';
 import { useEffect, useState } from 'react';
-import { StyleSheet, Text } from 'react-native';
+import { Image, StyleSheet, Text, View } from 'react-native';
 import { TouchableOpacity } from 'react-native';
 import { Animated } from 'react-native';
 import SpaceBox from '../../components/common/SpaceBox';
 import { useNavigation } from '@react-navigation/native';
 import { BottomBarRoute } from '../../navigations/routes';
+import { PropTypes } from 'prop-types';
+
+const welcome_animation = require('../../../assets/welcome_animation.webp');
 
 const WelcomeContent = ({ nickname }) => {
   const navigation = useNavigation();
@@ -29,6 +32,7 @@ const WelcomeContent = ({ nickname }) => {
 
   useEffect(() => {
     fadeIn();
+    //eslint-disable-next-line
   }, []);
 
   return (
@@ -36,17 +40,26 @@ const WelcomeContent = ({ nickname }) => {
       <SpaceBox height={30} />
       <Text style={styles.headerText}>{nickname}님,</Text>
       <Text style={styles.headerText}>spacesheep 가입을 축하합니다!</Text>
-      <SpaceBox height={300} />
+      <SpaceBox height={40} />
+      <View style={styles.imageContentView}>
+        <Image style={styles.animationImmage} source={welcome_animation} />
+      </View>
+
+      <SpaceBox height={40} />
       <Text style={styles.subText}>
         spacesheep에서 다양한 이야기를 나눠보세요!
       </Text>
-      <SpaceBox height={50} />
+      <SpaceBox height={10} />
       <TouchableOpacity style={styles.nextButton} onPress={onPress}>
         <Text style={styles.nextButtonText}>시작하기</Text>
         <Feather name="arrow-right-circle" size={36} color="black" />
       </TouchableOpacity>
     </Animated.View>
   );
+};
+
+WelcomeContent.propTypes = {
+  nickname: PropTypes.string.isRequired,
 };
 
 const styles = StyleSheet.create({
@@ -94,6 +107,15 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: 'bold',
     marginEnd: 10,
+  },
+  imageContentView: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  animationImmage: {
+    width: 150,
+    height: 300,
   },
 });
 
