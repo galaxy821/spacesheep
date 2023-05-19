@@ -1,11 +1,13 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export const getToken = async () => {
-  let token;
   try {
-    token = await AsyncStorage.getItem('@token');
-    console.log('get token', token);
-    return token;
+    let accessToken = await AsyncStorage.getItem('@ACCESS_TOKEN');
+    let refreshToken = await AsyncStorage.getItem('@REFRESH_TOKEN');
+
+    if (!accessToken || !refreshToken) return null;
+
+    return { accessToken, refreshToken };
   } catch (e) {
     // eslint-disable-next-line no-console
     console.log('error', e + 'getToken');
@@ -13,9 +15,10 @@ export const getToken = async () => {
   }
 };
 
-export const setToken = async token => {
+export const setToken = async (accessToken, refreshToken) => {
   try {
-    await AsyncStorage.setItem('@token', token);
+    await AsyncStorage.setItem('@ACCESS_TOKEN', accessToken);
+    await AsyncStorage.setItem('@REFRESH_TOKEN', refreshToken);
   } catch (e) {
     // eslint-disable-next-line no-console
     console.log('error', e + 'setToken');
@@ -24,7 +27,10 @@ export const setToken = async token => {
 
 export const removeToken = async () => {
   try {
-    await AsyncStorage.clear();
+    // await AsyncStorage.clear();
+    await AsyncStorage.removeItem('@ACCESS_TOKEN');
+    await AsyncStorage.removeItem('@REFRESH_TOKEN');
+
     // eslint-disable-next-line no-console
     console.log('Token removed successfully');
   } catch (error) {

@@ -6,24 +6,25 @@ import SplashScreenForSpacesheep from '../screens/SplashScreen';
 import { Animated, StyleSheet, View } from 'react-native';
 import { getToken } from '../modules/Token';
 import AuthModalNavigator from './AuthNavigator';
-import { authStore } from '../store/Auth';
-import { RecoilRoot, useRecoilState } from 'recoil';
+import { authStoreSelector } from '../store/Auth';
+import { useSetRecoilState } from 'recoil';
 
 const RootNavigator = () => {
-  const [isReady, setIsReady] = useState(false);
+  const [isLoaded, setIsLoaded] = useState(false);
   const [showSplash, setShowSplash] = useState(true);
   const fadeAnim = new Animated.Value(1);
 
-  const [accessToken, setAccessToken] = useRecoilState(authStore);
+  // const [accessToken, setAccessToken] = useRecoilState(authStore);
+  const setAccessToken = useSetRecoilState(authStoreSelector);
 
   const getFonts = async () => {
     await Font.loadAsync(KoddiUDOnGothic);
   };
 
   const loadToken = async () => {
-    const token = await getToken();
-    if (token) {
-      setAccessToken(token);
+    const userTokens = await getToken();
+    if (userTokens != null) {
+      setAccessToken(userTokens.accessToken, userTokens.refreshToken);
     }
   };
 
@@ -45,20 +46,20 @@ const RootNavigator = () => {
         // eslint-disable-next-line no-console
         console.log(e);
       } finally {
-        setIsReady(true);
+        setIsLoaded(true);
       }
     })();
     //eslint-disable-next-line
   }, []);
 
   useEffect(() => {
-    if (isReady) {
+    if (isLoaded) {
       fadeOutAnimation();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isReady]);
+  }, [isLoaded]);
 
-  if (!isReady) {
+  if (!isLoaded) {
     return (
       <Animated.View style={{ flex: 1, opacity: fadeAnim }}>
         <SplashScreenForSpacesheep />
@@ -79,7 +80,7 @@ const RootNavigator = () => {
           <SplashScreenForSpacesheep />
         </Animated.View>
       )}
-      {isReady && (
+      {isLoaded && (
         <NavigationContainer>
           {/* <AppNavigator /> */}
           <AuthModalNavigator />

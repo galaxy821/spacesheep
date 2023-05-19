@@ -1,7 +1,6 @@
 import { useRoute, useNavigation } from '@react-navigation/native';
 import { useState, useEffect, useLayoutEffect, useRef } from 'react';
 import {
-  Button,
   FlatList,
   Keyboard,
   NativeModules,
@@ -14,9 +13,11 @@ import {
   SafeAreaView,
   useSafeAreaInsets,
 } from 'react-native-safe-area-context';
-import { MessageDummyData } from '../../values/DummyData';
+// import { MessageDummyData } from '../../values/DummyData';
 import { Entypo, Ionicons, MaterialIcons } from '@expo/vector-icons';
-import SpaceBox from '../../components/common/SpaceBox';
+
+import dummydata from '../../../assets/dummy/message/message_dummy.json';
+import ChatList from '../../components/space/ChatList';
 
 const { StatusBarManager } = NativeModules;
 
@@ -24,14 +25,14 @@ const SpaceScreen = () => {
   const [spaceInfo, setSpaceInfo] = useState({ id: 0, name: '' });
   const [messages, setMessages] = useState(null);
   const [input, setInput] = useState('');
+  const [messageQueue, setMessageQueue] = useState([]);
 
   const navigation = useNavigation();
   const route = useRoute();
 
   const textInputRef = useRef(null);
-  const flatListRef = useRef(null);
 
-  const { safeArea } = useSafeAreaInsets();
+  // const { safeArea } = useSafeAreaInsets();
 
   const handleBackPress = () => {
     navigation.goBack();
@@ -39,17 +40,17 @@ const SpaceScreen = () => {
 
   const handleSend = () => {
     // Add the message to the messages array
+    if (input === '') return;
+
     const newMessage = {
-      message_id: messages.length + 1,
+      message_id: messages.length + 100,
       message: input,
       user_id: 23214,
     };
-    setMessages([...messages, newMessage]);
+    setMessages([newMessage, ...messages]);
     // Clear the input field
     setInput('');
   };
-
-  // const renderItem = ({ item }) => <Text>{item}</Text>;
 
   useLayoutEffect(() => {
     navigation.setOptions({
@@ -79,7 +80,7 @@ const SpaceScreen = () => {
       id: route.params.id,
       name: route.params.name,
     });
-    setMessages(MessageDummyData);
+    setMessages(dummydata);
   }, [route.params]);
 
   return (
@@ -116,72 +117,7 @@ const SpaceScreen = () => {
         </View>
 
         <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-          <FlatList
-            ref={flatListRef}
-            onContentSizeChange={() => flatListRef.current.scrollToEnd()}
-            onLayout={() => flatListRef.current.scrollToEnd()}
-            safeArea={safeArea}
-            style={{
-              height: 200,
-              backgroundColor: 'white',
-              paddingHorizontal: 20,
-              paddingVertical: 0,
-
-              // display: 'flex',
-            }}
-            contentContainerStyle={{ paddingBottom: 10 }}
-            data={messages}
-            keyExtractor={item => item.message_id}
-            renderItem={({ item }) =>
-              item.user_id == '23214' ? (
-                <View
-                  style={{
-                    alignSelf: 'flex-end',
-                    padding: 10,
-                    paddingHorizontal: 15,
-                    color: 'white',
-                    backgroundColor: '#0084FF',
-                    fontSize: 16,
-                    borderRadius: 15,
-                    marginVertical: 10,
-                  }}
-                >
-                  <Text
-                    style={{
-                      color: 'white',
-                      backgroundColor: '#0084FF',
-                      fontSize: 16,
-                    }}
-                  >
-                    {item.message}
-                  </Text>
-                </View>
-              ) : (
-                <View
-                  style={{
-                    alignSelf: 'flex-start',
-                    padding: 10,
-                    paddingHorizontal: 15,
-                    color: 'black',
-                    backgroundColor: '#E8E8E8',
-                    fontSize: 16,
-                    borderRadius: 15,
-                    marginVertical: 10,
-                  }}
-                >
-                  <Text
-                    style={{
-                      color: 'black',
-                      backgroundColor: '#E8E8E8',
-                      fontSize: 16,
-                    }}
-                  >
-                    {item.message}
-                  </Text>
-                </View>
-              )
-            }
-          />
+          {messages ? <ChatList messages={messages} /> : <View></View>}
         </TouchableWithoutFeedback>
 
         <View
@@ -213,7 +149,7 @@ const SpaceScreen = () => {
                 height: 45,
               }}
               ref={textInputRef}
-              placeholder="Type your message here..."
+              placeholder="메시지를 입력하세요."
             />
             <TouchableOpacity
               onPress={handleSend}

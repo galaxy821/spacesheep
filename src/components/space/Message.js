@@ -1,26 +1,36 @@
-import { StyleSheet } from 'react-native';
 import { Text, View } from 'react-native';
+import { PropTypes } from 'prop-types';
 
-const Message = ({ text }) => {
+const ChatMessage = ({ item, isMine }) => {
   return (
-    <View style={styles.container}>
-      <Text style={styles.text}>{text}</Text>
+    <View
+      style={{
+        alignSelf: isMine ? 'flex-end' : 'flex-start',
+        padding: 10,
+        paddingHorizontal: 15,
+        color: isMine ? 'white' : 'black',
+        backgroundColor: isMine ? '#0084FF' : '#E8E8E8',
+        fontSize: 16,
+        borderRadius: 15,
+        marginVertical: 10,
+      }}
+    >
+      <Text
+        style={{
+          color: isMine ? 'white' : 'black',
+          backgroundColor: isMine ? '#0084FF' : '#E8E8E8',
+          fontSize: 16,
+        }}
+      >
+        {item.message}
+      </Text>
     </View>
   );
 };
 
-const styles = StyleSheet.create({
-  container: {
-    backgroundColor: 'rgba(0,0,0,0.5)',
-    padding: 10,
-    margin: 10,
-    borderRadius: 10,
-    alignSelf: 'flex-start',
-    maxWidth: '75%',
-  },
-  text: {
-    color: 'white',
-  },
-});
+ChatMessage.propTypes = {
+  item: PropTypes.object.isRequired,
+  isMine: PropTypes.bool.isRequired,
+};
 
-export default Message;
+export default ChatMessage;
