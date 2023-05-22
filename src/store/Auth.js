@@ -12,28 +12,22 @@ export const authStore = atom({
 });
 
 /**
- * 유저 토큰을 가져오는 selector
- */
-export const getValidToken = selector({
-  key: 'getValidToken',
-  get: ({ get }) => {
-    const { accessToken, refreshToken } = get(authStore);
-
-    return { accessToken, refreshToken };
-  },
-});
-
-/**
  * 유저 토큰을 가져오거나, 저장하는 selector
+ *
+ * @returns {Object} { accessToken, refreshToken }
+ * @returns {Function} set({ accessToken, refreshToken })
  */
 export const authStoreSelector = selector({
   key: 'authStoreSelector',
   get: ({ get }) => {
-    const userTokens = get(authStore);
+    const { accessToken, refreshToken } = get(authStore);
+    /*
+      access token 검증하는 로직 (유효기간 만료)
+    */
 
-    return userTokens;
+    return { accessToken, refreshToken };
   },
   set: ({ set }, newTokens) => {
-    set(authStore, newTokens);
+    return set(authStore, newTokens);
   },
 });

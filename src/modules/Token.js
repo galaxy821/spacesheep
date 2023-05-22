@@ -8,8 +8,12 @@ export const getToken = async () => {
   try {
     let accessToken = await AsyncStorage.getItem('@ACCESS_TOKEN');
     let refreshToken = await AsyncStorage.getItem('@REFRESH_TOKEN');
+    // eslint-disable-next-line no-console
+    console.log('F/getToken : accessToken', accessToken);
+    //  eslint-disable-next-line no-console
+    console.log('F/getToken : refreshToken', refreshToken);
 
-    if (!accessToken || !refreshToken) return null;
+    if (accessToken === null || refreshToken === null) return null;
 
     return { accessToken, refreshToken };
   } catch (error) {

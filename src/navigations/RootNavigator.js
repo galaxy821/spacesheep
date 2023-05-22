@@ -15,8 +15,7 @@ import AppModalNavigator from './AppModalNavigator';
 const RootNavigator = () => {
   const [isLoaded, setIsLoaded] = useState(false);
   const [showSplash, setShowSplash] = useState(true);
-  // const [accessToken, setAccessToken] = useRecoilState(authStore);
-  const setAccessToken = useSetRecoilState(authStoreSelector);
+  const setTokenToStore = useSetRecoilState(authStoreSelector);
   const fadeAnim = new Animated.Value(1);
 
   /**
@@ -27,7 +26,10 @@ const RootNavigator = () => {
       await getKoddiFonts();
       const userTokens = await getToken();
       if (userTokens != null) {
-        setAccessToken(userTokens.accessToken, userTokens.refreshToken);
+        setTokenToStore({
+          accessToken: userTokens.accessToken,
+          refreshToken: userTokens.refreshToken,
+        });
       }
 
       await new Promise(resolve => setTimeout(resolve, 4500));
@@ -47,7 +49,7 @@ const RootNavigator = () => {
 
   return (
     <View style={{ flex: 1 }}>
-      {showSplash && (
+      {!isLoaded && (
         <Animated.View
           style={{
             ...StyleSheet.absoluteFillObject,

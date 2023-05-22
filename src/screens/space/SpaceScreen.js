@@ -4,7 +4,7 @@ import {
   // FlatList,
   Keyboard,
   NativeModules,
-  Platform,
+  // Platform,
   TouchableWithoutFeedback,
 } from 'react-native';
 import { KeyboardAvoidingView, TextInput } from 'react-native';
@@ -65,13 +65,13 @@ const SpaceScreen = () => {
     //eslint-disable-next-line
   }, [navigation, spaceInfo]);
 
-  useEffect(() => {
-    Platform.OS == 'ios'
-      ? StatusBarManager.getHeight(statusBarFrameData => {
-          setStatusBarHeight(statusBarFrameData.height);
-        })
-      : null;
-  }, []);
+  // useEffect(() => {
+  //   Platform.OS == 'ios'
+  //     ? StatusBarManager.getHeight(statusBarFrameData => {
+  //         setStatusBarHeight(statusBarFrameData.height);
+  //       })
+  //     : null;
+  // }, []);
 
   const [statusBarHeight, setStatusBarHeight] = useState(0);
 
@@ -91,7 +91,8 @@ const SpaceScreen = () => {
       }}
     >
       <KeyboardAvoidingView
-        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+        // behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+        behavior={'padding'}
         keyboardVerticalOffset={statusBarHeight - 50}
         style={{ flex: 1 }}
       >

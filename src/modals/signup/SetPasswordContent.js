@@ -11,7 +11,7 @@ import {
   Animated,
 } from 'react-native';
 import { signUpContent } from '../../values/AuthValue';
-import { authStore } from '../../store/Auth';
+import { authStoreSelector } from '../../store/Auth';
 import { useSetRecoilState } from 'recoil';
 import { setToken } from '../../modules/Token';
 
@@ -29,7 +29,7 @@ const SetPasswordContent = ({
   const passwordRef = useRef(null);
   const confirmPasswordRef = useRef(null);
 
-  const setAccessToken = useSetRecoilState(authStore);
+  const setTokenToStore = useSetRecoilState(authStoreSelector);
 
   const fadeIn = () => {
     Animated.timing(viewAnim, {
@@ -63,8 +63,11 @@ const SetPasswordContent = ({
       // const result = signUpForUser(email, password);
       const result = true;
       if (result) {
-        setToken('token_for_test');
-        setAccessToken('token_for_test');
+        setToken('accessToken_for_test', 'refreshToken_for_test');
+        setTokenToStore({
+          accessToken: 'accessToken_for_test',
+          refreshToken: 'refreshToken_for_test',
+        });
         fadeOut();
       } else {
         setCurrentErrorMessage('회원가입에 실패했습니다.');

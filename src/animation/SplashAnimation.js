@@ -25,6 +25,11 @@ export const SplashAnimation = {
   fadeOut,
 };
 
+/**
+ * splash screen 사라지는 애니메이션
+ * @param {Animated.Value} fadeAnim
+ * @param {function} setShowSplash
+ */
 export const fadeOutSplashScreen = (fadeAnim, setShowSplash) => {
   Animated.timing(fadeAnim, {
     toValue: 0,

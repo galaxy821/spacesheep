@@ -1,18 +1,25 @@
 import LoginGuideScreen from '../screens/auth/LoginGuideScreen';
 import PropTypes from 'prop-types';
 import { useRecoilValue } from 'recoil';
-import { authStore } from '../store/Auth';
+import { authStoreSelector } from '../store/Auth';
 // import { useRecoilValue } from '../../node_modules/recoil/index.d';
 // import { authStore } from '../store/Auth';
 
 const AuthRequired = ({ children }) => {
-  const token = useRecoilValue(authStore);
+  const token = useRecoilValue(authStoreSelector);
   // const token = null;
-  if (token === null) {
-    console.log('token is null');
+  if (token.accessToken === null || token.refreshToken === null) {
+    // eslint-disable-next-line
+    console.log('JSX/AuthRequired : token is null');
     return <LoginGuideScreen />;
   } else {
-    console.log('authRequired', token);
+    // eslint-disable-next-line
+    console.log(
+      'JSX/AuthRequired : authRequired',
+      token,
+      token.accessToken,
+      token.refreshToken
+    );
     return children;
   }
 };
