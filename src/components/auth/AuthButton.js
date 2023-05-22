@@ -98,12 +98,12 @@ const AuthStyle = {
     border-radius: 10px;
     justify-content: center;
     align-items: center;
-    padding: 0px 10px;
+    padding: 10px;
     flex-direction: row;
-    shadow-color: #000;
+    /* shadow-color: #000;
     shadow-offset: 0px 2px;
     shadow-opacity: 0.1;
-    elevation: 5;
+    elevation: 5; */
   `,
   LoginText: styled.Text`
     font-size: 14px;

@@ -24,3 +24,11 @@ export const SplashAnimation = {
   fadeIn,
   fadeOut,
 };
+
+export const fadeOutSplashScreen = (fadeAnim, setShowSplash) => {
+  Animated.timing(fadeAnim, {
+    toValue: 0,
+    duration: 500,
+    useNativeDriver: true,
+  }).start(() => setShowSplash(false));
+};

@@ -1,12 +1,15 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import AppNavigator from './AppNavigator';
+import AppNavigator from './AppScreenNavigator';
 import { AppRoute } from './routes';
 import LoginScreen from '../screens/auth/LoginScreen';
 import SignUpScreen from '../screens/auth/SignUpScreen';
 
 const ModalStack = createNativeStackNavigator();
 
-function ModalNavigator() {
+/**
+ * Modal 관련 navigator
+ */
+function AppModalNavigator() {
   return (
     <ModalStack.Navigator
       screenOptions={{
@@ -15,7 +18,11 @@ function ModalNavigator() {
       }}
     >
       <ModalStack.Screen name="Main" component={AppNavigator} />
-      <ModalStack.Screen name={AppRoute.LOGIN} component={LoginScreen} />
+      <ModalStack.Screen
+        name={AppRoute.LOGIN}
+        component={LoginScreen}
+        options={{ gestureEnabled: false }}
+      />
       <ModalStack.Screen
         name={AppRoute.SIGN_UP}
         component={SignUpScreen}
@@ -25,4 +32,4 @@ function ModalNavigator() {
   );
 }
 
-export default ModalNavigator;
+export default AppModalNavigator;

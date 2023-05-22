@@ -1,54 +1,50 @@
 import { useNavigation } from '@react-navigation/native';
-import { useState, useRef } from 'react';
-import { StyleSheet, View, Animated } from 'react-native';
-import { loginWithGoogle } from '../../modules/Auth';
+// import { useState, useRef } from 'react';
+import { StyleSheet, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { AuthAnimation } from '../../animation/AuthAnimation';
-import AuthModal from '../../modals/AuthModal';
 import { Image } from 'expo-image';
+// import { AuthAnimation } from '../../animation/AuthAnimation';
 import sheepKnap from '../../../assets/sheepKnapImg.png';
 import { lightThemeColor } from '../../styles/Color';
 import { AuthTextButton, LoginButton } from '../../components/auth/AuthButton';
-import GoogleLogo from '../../asset/GoogleLogo';
-import AppleLogo from '../../asset/AppleLogo';
 import Title from '../../components/Title';
-// import GoogleAuth from '../../modules/TestAuth';
-import { authContent } from '../../values/AuthValue';
+// import { authContent } from '../../values/AuthValue';
 import { AppRoute } from '../../navigations/routes';
 import SpaceBox from '../../components/common/SpaceBox';
+import { Logo } from '../../assets/icons/Logo';
 
 const LoginGuideScreen = () => {
   const insets = useSafeAreaInsets();
-  const [showAuthModal, setShowAuthModal] = useState(false);
+  // const [showAuthModal, setShowAuthModal] = useState(false);
   const navigation = useNavigation();
-  const fadeAnim = useRef(new Animated.Value(0)).current;
-  const slideAnim = useRef(new Animated.Value(1000)).current;
+  // const fadeAnim = useRef(new Animated.Value(0)).current;
+  // const slideAnim = useRef(new Animated.Value(1000)).current;
 
-  const [currentAuthModal, setCurrentAuthModal] = useState(
-    authContent.LOGIN_CONTENT
-  );
+  // const [currentAuthModal, setCurrentAuthModal] = useState(
+  //   authContent.LOGIN_CONTENT
+  // );
 
-  const showContentModal = modalContent => {
-    setCurrentAuthModal(modalContent);
-    AuthAnimation.fadeIn(fadeAnim);
-    AuthAnimation.slideIn(slideAnim);
-    setShowAuthModal(true);
-  };
+  // const showContentModal = modalContent => {
+  //   setCurrentAuthModal(modalContent);
+  //   AuthAnimation.fadeIn(fadeAnim);
+  //   AuthAnimation.slideIn(slideAnim);
+  //   setShowAuthModal(true);
+  // };
 
-  const hideLoginModal = () => {
-    AuthAnimation.fadeOut(fadeAnim, setShowAuthModal);
-    AuthAnimation.slideOut(slideAnim);
-  };
+  // const hideLoginModal = () => {
+  //   AuthAnimation.fadeOut(fadeAnim, setShowAuthModal);
+  //   AuthAnimation.slideOut(slideAnim);
+  // };
 
   return (
     <View style={[loginGuideStyles.container, { paddingTop: insets.top }]}>
-      <AuthModal
+      {/* <AuthModal
         showAuthModal={showAuthModal}
         hideModal={hideLoginModal}
         fadeAnim={fadeAnim}
         slideAnim={slideAnim}
         modalContent={currentAuthModal}
-      />
+      /> */}
 
       <Image style={loginGuideStyles.image} source={sheepKnap}></Image>
 
@@ -60,7 +56,7 @@ const LoginGuideScreen = () => {
         title="이메일로 로그인"
         backgroundColor={lightThemeColor.primary}
         textColor={'white'}
-        onPress={() => showContentModal(authContent.LOGIN_CONTENT)}
+        // onPress={() => showContentModal(authContent.LOGIN_CONTENT)}
       ></LoginButton>
 
       <SpaceBox height={15} />
@@ -71,7 +67,7 @@ const LoginGuideScreen = () => {
         textColor={'black'}
         // onPress={loginWithGoogle}
       >
-        <GoogleLogo />
+        <Logo.GoogleLogo />
       </LoginButton>
 
       <SpaceBox height={15} />
@@ -80,9 +76,9 @@ const LoginGuideScreen = () => {
         title="Apple로 로그인"
         backgroundColor={'black'}
         textColor={'white'}
-        onPress={loginWithGoogle}
+        // onPress={loginWithGoogle}
       >
-        <AppleLogo />
+        <Logo.AppleLogo />
       </LoginButton>
 
       <SpaceBox height={30} />

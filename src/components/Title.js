@@ -1,9 +1,16 @@
-import { TitleStyle } from '../styles/DefaultStyle';
-import { TITLE_TEXT } from '../values/DefaultValue';
+import { StyleSheet, Text } from 'react-native';
 import { PropTypes } from 'prop-types';
+import { KODDI_FONT_BOLD } from '../assets/fonts/KoddiUOnGothic';
 
+const TITLE_TEXT = 'spacesheep';
+
+/**
+ * Title
+ * @param {number} size text 크기
+ * @returns {JSX.Element} Title 컴포넌트
+ */
 const Title = ({ size }) => {
-  return <TitleStyle size={size}>{TITLE_TEXT}</TitleStyle>;
+  return <Text style={TextStyles(size).text}>{TITLE_TEXT}</Text>;
 };
 
 Title.propTypes = {
@@ -11,3 +18,12 @@ Title.propTypes = {
 };
 
 export default Title;
+
+const TextStyles = size =>
+  StyleSheet.create({
+    text: {
+      fontSize: size,
+      fontFamily: KODDI_FONT_BOLD,
+      // fontWeight: 'bold',
+    },
+  });

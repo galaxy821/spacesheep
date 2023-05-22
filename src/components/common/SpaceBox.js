@@ -2,6 +2,12 @@ import { View } from 'react-native';
 import PropTypes from 'prop-types';
 import styled from 'styled-components/native';
 
+/**
+ * 빈 공간 만들기 위한 컴포넌트
+ * @param {number} height 높이
+ * @param {number} width 너비
+ * @returns {JSX.Element} 빈 박스 컴포넌트
+ */
 const SpaceBox = ({ height, width }) => {
   if (height != null && width != null) {
     return <HeightWidthBox style={{ height: height, width: width }} />;

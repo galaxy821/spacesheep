@@ -1,4 +1,4 @@
-import { BottomBarRoute, AuthRoutes } from './routes';
+import { BottomBarRoute } from './routes';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import HomeScreen from '../screens/home/HomeScreen';
 import AuthRequired from './AuthRequired';
@@ -6,20 +6,15 @@ import ProfileScreen from '../screens/profile/ProfileScreen';
 import PostMessageScreen from '../screens/postmessage/PostMessageScreen';
 import BookmarkScreen from '../screens/bookmark/BookmarkScreen';
 import MomentScreen from '../screens/moment/MomentSccreen';
-import HomeFilledIcon from '../components/icons/HomeFilledIcon';
-import HomeOutlinedIcon from '../components/icons/HomeOutlinedIcon';
-import MomentFilledIcon from '../components/icons/MomentFilledIcon';
-import MomentOutlinedIcon from '../components/icons/MomentOutlinedIcon';
-import BookmarkFilledIcon from '../components/icons/BookmarkFilledIcon';
-import BookmarkOutlinedIcon from '../components/icons/BookmarkOutlinedIcon';
-import PostMessageFilledIcon from '../components/icons/PostMessageFilledIcon';
-import PostMessageOutlinedIcon from '../components/icons/PostMessageOutlinedIcon';
-import ProfileFilledIcon from '../components/icons/ProfileFilledIcon';
-import ProfileOutlinedIcon from '../components/icons/ProfileOutlinedIcon';
 import { TAB_BAR_HEIGHT } from '../values/DefaultValue';
+import { SvgIcon } from '../assets/icons/SvgIcon';
 
 const BottomTab = createBottomTabNavigator();
 
+/**
+ * Bottom Bar 관련 navigator
+ * @returns {JSX.Element} 하단 탭 네비게이터
+ */
 function BottomBarNavigator() {
   return (
     <BottomTab.Navigator
@@ -36,14 +31,18 @@ function BottomBarNavigator() {
         component={HomeScreen}
         options={{
           tabBarIcon: ({ focused }) =>
-            focused ? <HomeFilledIcon /> : <HomeOutlinedIcon />,
+            focused ? <SvgIcon.HomeFilledIcon /> : <SvgIcon.HomeOutlinedIcon />,
         }}
       />
       <BottomTab.Screen
         name={BottomBarRoute.MOMENT}
         options={{
           tabBarIcon: ({ focused }) =>
-            focused ? <MomentFilledIcon /> : <MomentOutlinedIcon />,
+            focused ? (
+              <SvgIcon.MomentFilledIcon />
+            ) : (
+              <SvgIcon.MomentOutlinedIcon />
+            ),
         }}
       >
         {() => (
@@ -56,7 +55,11 @@ function BottomBarNavigator() {
         name={BottomBarRoute.BOOKMARK}
         options={{
           tabBarIcon: ({ focused }) =>
-            focused ? <BookmarkFilledIcon /> : <BookmarkOutlinedIcon />,
+            focused ? (
+              <SvgIcon.BookmarkFilledIcon />
+            ) : (
+              <SvgIcon.BookmarkOutlinedIcon />
+            ),
         }}
       >
         {() => (
@@ -70,7 +73,11 @@ function BottomBarNavigator() {
         name={BottomBarRoute.POST_MESSAGE}
         options={{
           tabBarIcon: ({ focused }) =>
-            focused ? <PostMessageFilledIcon /> : <PostMessageOutlinedIcon />,
+            focused ? (
+              <SvgIcon.PostMessageFilledIcon />
+            ) : (
+              <SvgIcon.PostMessageOutlinedIcon />
+            ),
         }}
       >
         {() => (
@@ -83,7 +90,11 @@ function BottomBarNavigator() {
         name={BottomBarRoute.PROFILE}
         options={{
           tabBarIcon: ({ focused }) =>
-            focused ? <ProfileFilledIcon /> : <ProfileOutlinedIcon />,
+            focused ? (
+              <SvgIcon.ProfileFilledIcon />
+            ) : (
+              <SvgIcon.ProfileOutlinedIcon />
+            ),
         }}
       >
         {() => (

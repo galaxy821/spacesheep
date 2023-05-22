@@ -1,9 +1,9 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { AppRoute } from './routes';
+import BottomBarNavigator from './BottomBarNavigator';
 import NoticeScreen from '../screens/home/NoticeScreen';
 import SearchResultScreen from '../screens/home/SearchResultScreen';
 import SpaceScreen from '../screens/space/SpaceScreen';
-import BottomBarNavigator from './BottomBarNavigator';
-import { AppRoute } from './routes';
 import CreateSpaceScreen from '../screens/profile/CreateSpaceScreen';
 import MomentContentScreen from '../screens/moment/MomentContentScreen';
 import FindPasswordScreen from '../screens/auth/FindPasswordScreen';
@@ -11,8 +11,10 @@ import SpaceSettingScreen from '../screens/space/SpaceSettingScreen';
 import ProfileSettingScreen from '../screens/profile/ProfileSettingScreen';
 
 const AppStack = createNativeStackNavigator();
-
-function AppNavigator() {
+/**
+ * Screen 관련 navigator
+ */
+function AppScreenNavigator() {
   return (
     <AppStack.Navigator screenOptions={{ headerShown: false }}>
       <AppStack.Screen
@@ -27,7 +29,6 @@ function AppNavigator() {
         name={AppRoute.FIND_PASSWORD}
         component={FindPasswordScreen}
       />
-      {/* <AppStack.Screen name={AppRoute.LOGIN} component={LoginScreen} /> */}
       <AppStack.Screen
         name={AppRoute.MOMENT_CONTENT}
         component={MomentContentScreen}
@@ -41,7 +42,6 @@ function AppNavigator() {
         name={AppRoute.SEARCH_RESULT}
         component={SearchResultScreen}
       />
-      {/* <AppStack.Screen name={AppRoute.SIGN_UP} component={SignUpScreen} /> */}
       <AppStack.Screen name={AppRoute.SPACE} component={SpaceScreen} />
       <AppStack.Screen
         name={AppRoute.SPACE_SETTING}
@@ -51,4 +51,4 @@ function AppNavigator() {
   );
 }
 
-export default AppNavigator;
+export default AppScreenNavigator;

@@ -6,8 +6,8 @@ import SpaceBox from '../../components/common/SpaceBox';
 // import { getUserStatus } from '../../modules/Auth';
 import { PropTypes } from 'prop-types';
 import { signUpContent } from '../../values/AuthValue';
-import SendEmailGIF from '../../asset/lottie/send_email.gif';
-import ConfirmGIF from '../../asset/lottie/confirm.gif';
+import SendEmailGIF from '../../assets/lottie/send_email.gif';
+import ConfirmGIF from '../../assets/lottie/confirm.gif';
 import { Image } from 'expo-image';
 
 const VerifiedEmailContent = ({ email, setCurrentSignUpContent }) => {

@@ -1,7 +1,7 @@
 import { useRoute, useNavigation } from '@react-navigation/native';
 import { useState, useEffect, useLayoutEffect, useRef } from 'react';
 import {
-  FlatList,
+  // FlatList,
   Keyboard,
   NativeModules,
   Platform,
@@ -11,13 +11,14 @@ import { KeyboardAvoidingView, TextInput } from 'react-native';
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import {
   SafeAreaView,
-  useSafeAreaInsets,
+  // useSafeAreaInsets,
 } from 'react-native-safe-area-context';
 // import { MessageDummyData } from '../../values/DummyData';
 import { Entypo, Ionicons, MaterialIcons } from '@expo/vector-icons';
 
 import dummydata from '../../../assets/dummy/message/message_dummy.json';
 import ChatList from '../../components/space/ChatList';
+// import socket from '../../modules/Chat';
 
 const { StatusBarManager } = NativeModules;
 
@@ -33,7 +34,6 @@ const SpaceScreen = () => {
   const textInputRef = useRef(null);
 
   // const { safeArea } = useSafeAreaInsets();
-
   const handleBackPress = () => {
     navigation.goBack();
   };

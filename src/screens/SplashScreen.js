@@ -4,8 +4,8 @@ import { ActivityIndicator, StyleSheet, Animated } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Image } from 'expo-image';
 import animationLogo from '../../assets/splashAnimation.gif';
-import Title from '../asset/TitleSVG';
 import { SplashAnimation } from '../animation/SplashAnimation';
+import { Logo } from '../assets/icons/Logo';
 
 const SplashScreenForSpacesheep = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -44,7 +44,7 @@ const SplashScreenForSpacesheep = () => {
         />
       </Animated.View>
       <Animated.View style={{ opacity: showTitle ? fadeOutAnim : fadeAnim }}>
-        <Title />
+        <Logo.Title />
       </Animated.View>
     </SafeAreaView>
   );

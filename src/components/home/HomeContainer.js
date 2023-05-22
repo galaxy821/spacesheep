@@ -1,34 +1,35 @@
-import { View } from 'react-native';
+import { FlatList, StyleSheet, View } from 'react-native';
 import { PropTypes } from 'prop-types';
-import { HomeBannerView, HomeFlatList } from '../../styles/HomeStyle';
 import SpaceThumbnail from '../SpaceThumbnail';
 import TitleSection from './HomeHeader';
 import SearchBar from '../SearchBar';
-import Banner from '../Banner';
 import InterestSection from './InterestSection';
-import { HOME_BANNER_IMAGES } from '../../test/dummy/ImageForHomeBanner';
-import {
-  BOTTOM_TAB_SAFE_AREA,
-  HOME_BANNER_ROTATION_TIME,
-  NUM_OF_COLUMNS,
-} from '../../values/HomeValue';
+import BannerSection from './BannerSection';
 import { dummyData } from '../../test/dummy/SpaceThumbnailData';
 
+const NUM_OF_COLUMNS = 3;
+const BOTTOM_TAB_SAFE_AREA = 100;
+
+/**
+ * 홈 화면 콘텐츠
+ * @param {number} safeArea 상단바 높이
+ * @returns {JSX.Element} 홈 화면 콘텐츠 컴포넌트
+ */
 const HomeContainer = ({ safeArea }) => {
   const renderItem = ({ item }) => <SpaceThumbnail space={item} />;
 
   return (
-    <HomeFlatList
-      safeArea={safeArea}
-      bottomBarArea={BOTTOM_TAB_SAFE_AREA}
-      bounces={false}
+    <FlatList
       data={dummyData}
       renderItem={renderItem}
       keyExtractor={item => item.id.toString()}
-      ListHeaderComponent={HomeScreenHeader}
-      showsVerticalScrollIndicator={false}
       numColumns={NUM_OF_COLUMNS}
-    
+      ListHeaderComponent={HomeScreenHeader}
+      safeArea={safeArea}
+      bottomBarArea={BOTTOM_TAB_SAFE_AREA}
+      showsVerticalScrollIndicator={false}
+      bounces={false}
+      style={HomeContainerStyles(BOTTOM_TAB_SAFE_AREA).spaceContentSection}
     />
   );
 };
@@ -37,28 +38,27 @@ HomeContainer.propTypes = {
   safeArea: PropTypes.number,
 };
 
+/**
+ * 홈 화면 헤더
+ * @returns {JSX.Element} 홈 화면 헤더 컴포넌트
+ */
 const HomeScreenHeader = () => {
   return (
     <View>
       <TitleSection />
       <BannerSection />
-      <SearchSection />
+      <SearchBar />
       <InterestSection />
     </View>
   );
 };
 
-const SearchSection = () => <SearchBar />;
-
-const BannerSection = () => {
-  return (
-    <HomeBannerView>
-      <Banner
-        rotationTime={HOME_BANNER_ROTATION_TIME}
-        banner_images={HOME_BANNER_IMAGES}
-      />
-    </HomeBannerView>
-  );
-};
-
 export default HomeContainer;
+
+const HomeContainerStyles = bottomBarArea =>
+  StyleSheet.create({
+    spaceContentSection: {
+      backgroundColor: '#fff',
+      paddingBottom: bottomBarArea,
+    },
+  });
