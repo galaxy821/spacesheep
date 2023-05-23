@@ -13,11 +13,19 @@ import { Feather } from '@expo/vector-icons';
 import { PropTypes } from 'prop-types';
 import { signUpContent } from '../../values/AuthValue';
 
+/**
+ * 프로필 설정 콘텐츠
+ * @param {object} props 컴포넌트 props
+ * @param {string} nickname 닉네임
+ * @param {function} setNickName 닉네임 변경 함수
+ * @param {function} openErrorModal 에러 모달 오픈 함수
+ * @param {function} setShowExitButton 뒤로가기 버튼 표시 함수
+ * @returns {JSX.Element} 프로필 설정 콘텐츠 컴포넌트
+ */
 const SetProfileContent = ({
   nickname,
   setNickName,
-  setCurrentErrorMessage,
-  setOpenModal,
+  openErrorModal,
   setShowExitButton,
   setCurrentSignUpContent,
 }) => {
@@ -27,8 +35,7 @@ const SetProfileContent = ({
 
   const onSubmitNickname = async () => {
     if (nickname.length === 0) {
-      setCurrentErrorMessage('닉네임을 입력해주세요.');
-      setOpenModal(true);
+      openErrorModal('닉네임을 입력해주세요.');
       return;
     } else {
       // set nickname by update auth
@@ -38,8 +45,7 @@ const SetProfileContent = ({
       if (result) {
         fadeOut();
       } else {
-        setCurrentErrorMessage('중복되는 닉네임입니다.');
-        setOpenModal(true);
+        openErrorModal('중복되는 닉네임입니다.');
       }
     }
   };
@@ -103,8 +109,7 @@ const SetProfileContent = ({
 SetProfileContent.propTypes = {
   nickname: PropTypes.string.isRequired,
   setNickName: PropTypes.func.isRequired,
-  setCurrentErrorMessage: PropTypes.func.isRequired,
-  setOpenModal: PropTypes.func.isRequired,
+  openErrorModal: PropTypes.func.isRequired,
   //   navigation: PropTypes.object,
   setShowExitButton: PropTypes.func.isRequired,
   setCurrentSignUpContent: PropTypes.func.isRequired,

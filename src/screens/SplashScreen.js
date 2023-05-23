@@ -1,15 +1,20 @@
 import { StatusBar } from 'expo-status-bar';
 import { useEffect, useRef, useState } from 'react';
-import { ActivityIndicator, StyleSheet, Animated } from 'react-native';
+import { StyleSheet, Animated } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Image } from 'expo-image';
 import animationLogo from '../../assets/splashAnimation.gif';
 import { SplashAnimation } from '../animation/SplashAnimation';
 import { Logo } from '../assets/icons/Logo';
 
-const SplashScreenForSpacesheep = () => {
-  const [isLoading, setIsLoading] = useState(true);
+/**
+ * Splash Screen
+ * @returns {JSX.Element} Splash Screen 컴포넌트
+ */
+const SplashScreen = () => {
+  // const [isLoading, setIsLoading] = useState(true);
   const [showTitle, setShowTitle] = useState(false);
+
   const fadeAnim = useRef(new Animated.Value(0)).current;
   const fadeOutAnim = useRef(new Animated.Value(1)).current;
 
@@ -22,7 +27,7 @@ const SplashScreenForSpacesheep = () => {
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar style="dark" />
-      {isLoading && <ActivityIndicator size={'large'} />}
+      {/* {isLoading && <ActivityIndicator size={'large'} />} */}
       <Animated.View
         style={[
           {
@@ -36,11 +41,11 @@ const SplashScreenForSpacesheep = () => {
             width: 200,
             height: 350,
             backgroundColor: '#CFB0DD',
-            opacity: isLoading ? 0 : 1,
+            // opacity: isLoading ? 0 : 1,
           }}
-          onLoadStart={() => setIsLoading(true)}
-          onLoad={() => setIsLoading(false)}
-          onError={() => setIsLoading(false)}
+          // onLoadStart={() => setIsLoading(true)}
+          // onLoad={() => setIsLoading(false)}
+          // onError={() => setIsLoading(false)}
         />
       </Animated.View>
       <Animated.View style={{ opacity: showTitle ? fadeOutAnim : fadeAnim }}>
@@ -50,7 +55,7 @@ const SplashScreenForSpacesheep = () => {
   );
 };
 
-export default SplashScreenForSpacesheep;
+export default SplashScreen;
 
 const styles = StyleSheet.create({
   container: {

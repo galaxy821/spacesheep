@@ -1,62 +1,33 @@
 import { useNavigation } from '@react-navigation/native';
-// import { useState, useRef } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Image } from 'expo-image';
-// import { AuthAnimation } from '../../animation/AuthAnimation';
 import sheepKnap from '../../../assets/sheepKnapImg.png';
 import { lightThemeColor } from '../../styles/Color';
 import { AuthTextButton, LoginButton } from '../../components/auth/AuthButton';
 import Title from '../../components/Title';
-// import { authContent } from '../../values/AuthValue';
 import { AppRoute } from '../../navigations/routes';
 import SpaceBox from '../../components/common/SpaceBox';
 import { Logo } from '../../assets/icons/Logo';
 
+/**
+ * 로그인 가이드 화면
+ * @returns {JSX.Element} 로그인 가이드 화면 컴포넌트
+ */
 const LoginGuideScreen = () => {
   const insets = useSafeAreaInsets();
-  // const [showAuthModal, setShowAuthModal] = useState(false);
   const navigation = useNavigation();
-  // const fadeAnim = useRef(new Animated.Value(0)).current;
-  // const slideAnim = useRef(new Animated.Value(1000)).current;
-
-  // const [currentAuthModal, setCurrentAuthModal] = useState(
-  //   authContent.LOGIN_CONTENT
-  // );
-
-  // const showContentModal = modalContent => {
-  //   setCurrentAuthModal(modalContent);
-  //   AuthAnimation.fadeIn(fadeAnim);
-  //   AuthAnimation.slideIn(slideAnim);
-  //   setShowAuthModal(true);
-  // };
-
-  // const hideLoginModal = () => {
-  //   AuthAnimation.fadeOut(fadeAnim, setShowAuthModal);
-  //   AuthAnimation.slideOut(slideAnim);
-  // };
 
   return (
     <View style={[loginGuideStyles.container, { paddingTop: insets.top }]}>
-      {/* <AuthModal
-        showAuthModal={showAuthModal}
-        hideModal={hideLoginModal}
-        fadeAnim={fadeAnim}
-        slideAnim={slideAnim}
-        modalContent={currentAuthModal}
-      /> */}
-
       <Image style={loginGuideStyles.image} source={sheepKnap}></Image>
-
       <Title size={32} />
-
       <SpaceBox height={30} />
 
       <LoginButton
         title="이메일로 로그인"
         backgroundColor={lightThemeColor.primary}
         textColor={'white'}
-        // onPress={() => showContentModal(authContent.LOGIN_CONTENT)}
       ></LoginButton>
 
       <SpaceBox height={15} />
@@ -65,7 +36,6 @@ const LoginGuideScreen = () => {
         title="Google로 로그인"
         backgroundColor={'white'}
         textColor={'black'}
-        // onPress={loginWithGoogle}
       >
         <Logo.GoogleLogo />
       </LoginButton>
@@ -76,7 +46,6 @@ const LoginGuideScreen = () => {
         title="Apple로 로그인"
         backgroundColor={'black'}
         textColor={'white'}
-        // onPress={loginWithGoogle}
       >
         <Logo.AppleLogo />
       </LoginButton>
@@ -85,11 +54,9 @@ const LoginGuideScreen = () => {
 
       <AuthTextButton
         title="아직 회원이 아니신가요?"
-        // onPress={() => showContentModal(authContent.SIGNUP_CONTENT)}
         onPress={() => navigation.navigate(AppRoute.SIGN_UP)}
       />
       <SpaceBox height={30} />
-      {/* <GoogleAuth /> */}
     </View>
   );
 };

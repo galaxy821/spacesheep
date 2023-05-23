@@ -7,46 +7,39 @@ import {
   Text,
   Animated,
 } from 'react-native';
-import { Feather } from '@expo/vector-icons';
-import SpaceBox from '../../components/common/SpaceBox';
-import { PropTypes } from 'prop-types';
-// import { useNavigation } from '@react-navigation/native';
 import { useRef, useState, useEffect } from 'react';
-import { signUpContent } from '../../values/AuthValue';
+import { Feather } from '@expo/vector-icons';
+import { PropTypes } from 'prop-types';
+import SpaceBox from '../../components/common/SpaceBox';
+import { emailRegExp, signUpContent } from '../../values/AuthValue';
 import ViewBox from '../../components/common/ViewBox';
-// import { sendEmailForAuth } from '../../modules/Auth';
+import { AuthAnimation } from '../../animation/AuthAnimation';
+// import { sendEmailForVerified } from '../../modules/Auth';
 
-const emailRegExp =
-  /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
-
+/**
+ * 이메일 입력 컨텐츠
+ * @param {object} props 컴포넌트 props
+ * @param {string} email 이메일
+ * @param {function} setEmail 이메일 변경 함수
+ * @param {function} openErrorModal 에러 모달 오픈 함수
+ * @param {function} setCurrentSignUpContent 회원가입 컨텐츠 변경 함수
+ * @returns {JSX.Element} 이메일 입력 컨텐츠 컴포넌트
+ */
 const SetEmailContent = ({
   email,
   setEmail,
-  setOpenModal,
-  setCurrentErrorMessage,
+  openErrorModal,
   setCurrentSignUpContent,
 }) => {
-  // const navigation = useNavigation();
-
+  const windowWidth = Dimensions.get('window').width;
   const [textAnim] = useState(new Animated.Value(1));
   const [inputAnim] = useState(new Animated.Value(1));
-
-  const windowWidth = Dimensions.get('window').width;
-
   const textInputRef = useRef(null);
 
-  const fadeOut = () => {
+  const moveToCheckVerifiedEmailContent = () => {
     Animated.stagger(300, [
-      Animated.timing(textAnim, {
-        toValue: 0,
-        duration: 500,
-        useNativeDriver: true,
-      }),
-      Animated.timing(inputAnim, {
-        toValue: 0,
-        duration: 500,
-        useNativeDriver: true,
-      }),
+      AuthAnimation.fadeOut(textAnim, 500),
+      AuthAnimation.fadeOut(inputAnim, 500),
     ]).start(() => {
       setCurrentSignUpContent(signUpContent.EMAIL_VERIFIED);
     });
@@ -54,25 +47,27 @@ const SetEmailContent = ({
 
   const onSendEmail = () => {
     if (email.length === 0) {
-      setCurrentErrorMessage('이메일을 입력해주세요.');
-      setOpenModal(true);
+      openErrorModal('이메일을 입력해주세요.');
       return;
     }
     if (!emailRegExp.test(email)) {
-      setCurrentErrorMessage('이메일 형식이 올바르지 않습니다.');
-      setOpenModal(true);
+      openErrorModal('이메일 형식이 올바르지 않습니다.');
       return;
     } else {
-      // post /auth/signup/email
-      // const code = sendEmailForAuth(email);
+      // POST /auth/email-verified
+      // const code = sendEmailForVerified(email);
       const code = 200;
 
       if (code === 200) {
-        fadeOut();
+        // 200: 이메일 전송 성공
+        moveToCheckVerifiedEmailContent();
       } else if (code === 401) {
         // 401: 이미 가입된 이메일
-        setCurrentErrorMessage('이미 가입된 이메일입니다.');
-        setOpenModal(true);
+        openErrorModal('이미 가입된 이메일입니다.');
+        return;
+      } else {
+        // 500 : 기타 오류
+        openErrorModal('오류가 발생했습니다. 잠시후 시도해주세요');
         return;
       }
     }
@@ -124,8 +119,7 @@ const SetEmailContent = ({
 SetEmailContent.propTypes = {
   email: PropTypes.string,
   setEmail: PropTypes.func,
-  setOpenModal: PropTypes.func,
-  setCurrentErrorMessage: PropTypes.func,
+  openErrorModal: PropTypes.func,
   setCurrentSignUpContent: PropTypes.func,
 };
 
@@ -139,9 +133,8 @@ const signUpStyles = StyleSheet.create({
     backgroundColor: 'white',
   },
   contentText: {
-    fontSize: 28,
+    fontSize: 26,
     fontWeight: 'bold',
-    marginBottom: 20,
   },
   textInputContainer: {
     display: 'flex',

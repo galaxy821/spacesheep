@@ -21,6 +21,15 @@ import { setToken } from './Token';
 // };
 
 /**
+ * 지연시간 만큼 대기하는 Promise 반환
+ * @param {number} duration 지연시간 (ms)
+ * @returns {Promise} Promise 객체
+ */
+export const delay = duration => {
+  return new Promise(resolve => setTimeout(resolve, duration));
+};
+
+/**
  * 인증할 이메일 전송 요청 (POST /auth/email-verified)
  * @param {string} email
  * @returns {number} 200 : 이메일 전송 성공, 401 : 이미 가입된 이메일, 500 : 기타 오류

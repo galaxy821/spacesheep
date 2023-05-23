@@ -4,7 +4,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { useSetRecoilState } from 'recoil';
 import { getToken } from '../modules/Token';
 import { authStoreSelector } from '../store/Auth';
-import SplashScreenForSpacesheep from '../screens/SplashScreen';
+import SplashScreen from '../screens/SplashScreen';
 import { getKoddiFonts } from '../assets/fonts/KoddiUOnGothic';
 import { fadeOutSplashScreen } from '../animation/SplashAnimation';
 import AppModalNavigator from './AppModalNavigator';
@@ -49,7 +49,7 @@ const RootNavigator = () => {
 
   return (
     <View style={{ flex: 1 }}>
-      {!isLoaded && (
+      {(!isLoaded || showSplash) && (
         <Animated.View
           style={{
             ...StyleSheet.absoluteFillObject,
@@ -57,7 +57,7 @@ const RootNavigator = () => {
             zIndex: 1,
           }}
         >
-          <SplashScreenForSpacesheep />
+          <SplashScreen />
         </Animated.View>
       )}
       {isLoaded && (

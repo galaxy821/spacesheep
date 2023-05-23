@@ -7,18 +7,22 @@ import {
   TouchableWithoutFeedback,
   Keyboard,
 } from 'react-native';
-import SpaceBox from '../../components/common/SpaceBox';
+import SpaceBox from '../components/common/SpaceBox';
 import { Feather } from '@expo/vector-icons';
-import ConfirmModal from '../../modals/ConfirmModal';
-import SetEmailContent from '../../modals/signup/SetEmailContent';
-import { signUpContent } from '../../values/AuthValue';
-import VerifiedEmailContent from '../../modals/signup/VerifiedEmailContent';
-import SetPasswordContent from '../../modals/signup/SetPasswordContent';
-import SetProfileContent from '../../modals/signup/SetProfileContent';
-import ErrorContent from './ErrorContent';
-import WelcomeContent from '../../modals/signup/WelcomeContent';
+import ConfirmModal from './ConfirmModal';
+import SetEmailContent from './signUpContents/SetEmailContent';
+import { signUpContent } from '../values/AuthValue';
+import VerifiedEmailContent from './signUpContents/VerifiedEmailContent';
+import SetPasswordContent from './signUpContents/SetPasswordContent';
+import SetProfileContent from './signUpContents/SetProfileContent';
+import ErrorContent from '../screens/auth/ErrorContent';
+import WelcomeContent from './signUpContents/WelcomeContent';
 
-const SignUpScreen = () => {
+/**
+ * 회원가입 모달
+ * @returns {JSX.Element} 회원가입 모달 컴포넌트
+ */
+const SignUpModal = () => {
   const [isOpenMoadl, setOpenModal] = useState(false);
   const [showExitButton, setShowExitButton] = useState(true);
   const [currentErrorMessage, setCurrentErrorMessage] = useState('');
@@ -29,6 +33,11 @@ const SignUpScreen = () => {
   const [nickname, setNickName] = useState('');
 
   const navigation = useNavigation();
+
+  const openErrorModal = message => {
+    setCurrentErrorMessage(message);
+    setOpenModal(true);
+  };
 
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
@@ -51,8 +60,7 @@ const SignUpScreen = () => {
           <SetEmailContent
             email={email}
             setEmail={setEmail}
-            setOpenModal={setOpenModal}
-            setCurrentErrorMessage={setCurrentErrorMessage}
+            openErrorModal={openErrorModal}
             setCurrentSignUpContent={setCurrentSignUpContent}
           />
         ) : currentSignUpContent === signUpContent.EMAIL_VERIFIED ? (
@@ -64,16 +72,14 @@ const SignUpScreen = () => {
           <SetPasswordContent
             email={email}
             setCurrentSignUpContent={setCurrentSignUpContent}
-            setOpenModal={setOpenModal}
-            setCurrentErrorMessage={setCurrentErrorMessage}
+            openErrorModal={openErrorModal}
           />
         ) : currentSignUpContent === signUpContent.SET_PROFILE ? (
           <SetProfileContent
             nickname={nickname}
             setNickName={setNickName}
             navigation={navigation}
-            setCurrentErrorMessage={setCurrentErrorMessage}
-            setOpenModal={setOpenModal}
+            openErrorModal={openErrorModal}
             setShowExitButton={setShowExitButton}
             setCurrentSignUpContent={setCurrentSignUpContent}
           />
@@ -136,4 +142,4 @@ const signUpStyles = StyleSheet.create({
   },
 });
 
-export default SignUpScreen;
+export default SignUpModal;

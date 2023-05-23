@@ -1,15 +1,22 @@
 import { useEffect, useState } from 'react';
-import { Text, Animated } from 'react-native';
-import { StyleSheet } from 'react-native';
-import { View } from 'react-native';
-import SpaceBox from '../../components/common/SpaceBox';
-// import { getUserStatus } from '../../modules/Auth';
+import { Text, Animated, View, StyleSheet } from 'react-native';
+import { Image } from 'expo-image';
 import { PropTypes } from 'prop-types';
+import SpaceBox from '../../components/common/SpaceBox';
 import { signUpContent } from '../../values/AuthValue';
 import SendEmailGIF from '../../assets/lottie/send_email.gif';
 import ConfirmGIF from '../../assets/lottie/confirm.gif';
-import { Image } from 'expo-image';
+import { AuthAnimation } from '../../animation/AuthAnimation';
+import { delay } from '../../modules/Auth';
+// import { getUserStatus } from '../../modules/Auth';
 
+/**
+ * 이메일 인증 컨텐츠
+ * @param {object} props 컴포넌트 props
+ * @param {string} email 이메일
+ * @param {function} setCurrentSignUpContent 회원가입 컨텐츠 변경 함수
+ * @returns {JSX.Element} 이메일 인증 컨텐츠 컴포넌트
+ */
 const VerifiedEmailContent = ({ email, setCurrentSignUpContent }) => {
   const [isVerified, setIsVerified] = useState(false);
 
@@ -20,76 +27,19 @@ const VerifiedEmailContent = ({ email, setCurrentSignUpContent }) => {
 
   const fadeIn = () => {
     Animated.stagger(0, [
-      Animated.timing(mainTextAnim, {
-        toValue: 1,
-        duration: 300,
-        useNativeDriver: true,
-      }),
-      Animated.timing(inputAnim, {
-        toValue: 1,
-        duration: 300,
-        useNativeDriver: true,
-      }),
-      Animated.timing(subTextAnim, {
-        toValue: 1,
-        duration: 300,
-        useNativeDriver: true,
-      }),
+      AuthAnimation.fadeIn(mainTextAnim, 300),
+      AuthAnimation.fadeIn(inputAnim, 300),
+      AuthAnimation.fadeIn(subTextAnim, 300),
+      AuthAnimation.fadeIn(sendEmailIconAnim, 300),
     ]).start();
   };
 
   const fadeOut = () => {
     Animated.stagger(0, [
-      Animated.timing(mainTextAnim, {
-        toValue: 0,
-        duration: 300,
-        useNativeDriver: true,
-      }),
-      Animated.timing(inputAnim, {
-        toValue: 0,
-        duration: 300,
-        useNativeDriver: true,
-      }),
-      Animated.timing(subTextAnim, {
-        toValue: 0,
-        duration: 300,
-        useNativeDriver: true,
-      }),
-      Animated.timing(sendEmailIconAnim, {
-        toValue: 0,
-        duration: 300,
-        useNativeDriver: true,
-      }),
-    ]).start();
-  };
-
-  const VerifiedContentFadeIn = () => {
-    Animated.stagger(0, [
-      Animated.timing(mainTextAnim, {
-        toValue: 1,
-        duration: 300,
-        useNativeDriver: true,
-      }),
-    ]).start();
-  };
-
-  const VerifiedContentFadeOut = () => {
-    Animated.stagger(0, [
-      Animated.timing(mainTextAnim, {
-        toValue: 0,
-        duration: 300,
-        useNativeDriver: true,
-      }),
-    ]).start();
-  };
-
-  const SendEmailIconAnim = () => {
-    Animated.stagger(300, [
-      Animated.timing(sendEmailIconAnim, {
-        toValue: 1,
-        duration: 300,
-        useNativeDriver: true,
-      }),
+      AuthAnimation.fadeOut(mainTextAnim, 300),
+      AuthAnimation.fadeOut(inputAnim, 300),
+      AuthAnimation.fadeOut(subTextAnim, 300),
+      AuthAnimation.fadeOut(sendEmailIconAnim, 300),
     ]).start();
   };
 
@@ -97,10 +47,10 @@ const VerifiedEmailContent = ({ email, setCurrentSignUpContent }) => {
     fadeOut();
     await delay(500);
     setIsVerified(true);
-    VerifiedContentFadeIn();
+    AuthAnimation.fadeIn(mainTextAnim, 300);
 
     await delay(2000);
-    VerifiedContentFadeOut();
+    AuthAnimation.fadeOut(mainTextAnim, 300);
 
     await delay(500);
     setCurrentSignUpContent(signUpContent.SET_PASSWORD);
@@ -109,16 +59,10 @@ const VerifiedEmailContent = ({ email, setCurrentSignUpContent }) => {
   useEffect(() => {
     fadeIn();
     setTimeout(() => {
-      SendEmailIconAnim();
-    }, 500);
-    setTimeout(() => {
       handleTransition();
     }, 5000);
+    //eslint-disable-next-line
   }, []);
-
-  const delay = duration => {
-    return new Promise(resolve => setTimeout(resolve, duration));
-  };
 
   /* 
   //email check logic

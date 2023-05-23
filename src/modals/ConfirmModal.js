@@ -1,10 +1,17 @@
-import { Modal, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { Modal, StyleSheet, Text, View } from 'react-native';
 import { PropTypes } from 'prop-types';
-import styled from 'styled-components/native';
 import SpaceBox from '../components/common/SpaceBox';
 import { AuthButton } from '../components/auth/AuthButton';
 import { lightThemeColor } from '../styles/Color';
 
+/**
+ * 확인 Modal
+ * @param {object} props 컴포넌트 props
+ * @param {boolean} isOpen Modal 오픈 여부
+ * @param {function} onClose Modal 닫기 함수
+ * @param {string} contentText Modal 내용 텍스트
+ * @returns {JSX.Element} 확인 Modal 컴포넌트
+ */
 const ConfirmModal = ({ isOpen, onClose, contentText }) => {
   return (
     <Modal
@@ -15,7 +22,7 @@ const ConfirmModal = ({ isOpen, onClose, contentText }) => {
         onClose();
       }}
     >
-      <ModalLayout>
+      <View style={confirmStyles.layout}>
         <View style={confirmStyles.container}>
           <SpaceBox height={10} />
           <Text style={confirmStyles.text}>{contentText}</Text>
@@ -28,7 +35,7 @@ const ConfirmModal = ({ isOpen, onClose, contentText }) => {
             onPress={onClose}
           />
         </View>
-      </ModalLayout>
+      </View>
     </Modal>
   );
 };
@@ -42,14 +49,13 @@ ConfirmModal.propTypes = {
 
 export default ConfirmModal;
 
-const ModalLayout = styled.View`
-  flex: 1;
-  align-items: center;
-  justify-content: center;
-  background-color: rgba(0, 0, 0, 0.3);
-`;
-
 const confirmStyles = StyleSheet.create({
+  layout: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: 'rgba(0,0,0,0.3)',
+  },
   container: {
     backgroundColor: 'white',
     borderRadius: 10,

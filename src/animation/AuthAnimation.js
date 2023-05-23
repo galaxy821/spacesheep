@@ -1,44 +1,34 @@
 import { Animated, Easing } from 'react-native';
 
-const fadeIn = fadeAnim => {
+const fadeIn = (fadeAnim, timming) => {
   Animated.timing(fadeAnim, {
     toValue: 1,
-    duration: 300,
+    duration: timming,
     easing: Easing.inOut(Easing.quad),
     useNativeDriver: true,
   }).start();
 };
 
-const fadeOut = (fadeAnim, setShowAuthModal) => {
+const fadeOut = (fadeAnim, timming) => {
   Animated.timing(fadeAnim, {
     toValue: 0,
-    duration: 300,
+    duration: timming,
     easing: Easing.inOut(Easing.quad),
     useNativeDriver: true,
-  }).start(() => setShowAuthModal(false));
+  }).start();
 };
 
-const slideIn = slideAnim => {
-  Animated.timing(slideAnim, {
+const fadeOutWithCallback = (fadeAnim, timming, callback) => {
+  Animated.timing(fadeAnim, {
     toValue: 0,
-    duration: 500,
+    duration: timming,
     easing: Easing.inOut(Easing.quad),
     useNativeDriver: true,
-  }).start();
-};
-
-const slideOut = slideAnim => {
-  Animated.timing(slideAnim, {
-    toValue: 1000,
-    duration: 500,
-    easing: Easing.inOut(Easing.quad),
-    useNativeDriver: true,
-  }).start();
+  }).start(callback);
 };
 
 export const AuthAnimation = {
   fadeIn,
   fadeOut,
-  slideIn,
-  slideOut,
+  fadeOutWithCallback,
 };

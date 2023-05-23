@@ -1,20 +1,26 @@
-import styled from 'styled-components/native';
-import { lightThemeColor } from '../../styles/Color';
+import { TouchableOpacity, Text, StyleSheet } from 'react-native';
 import { PropTypes } from 'prop-types';
+import { lightThemeColor } from '../../styles/Color';
 import SpaceBox from '../common/SpaceBox';
-import { TouchableOpacity } from 'react-native';
-import { Text } from 'react-native';
 
+/**
+ * 인증 버튼
+ * @param {object} props 컴포넌트 props
+ * @param {string} title 버튼 텍스트
+ * @param {number} width 버튼 너비
+ * @param {number} height 버튼 높이
+ * @param {string} color 버튼 배경색
+ * @param {function} onPress 버튼 클릭 시 실행 함수
+ * @returns {JSX.Element} 인증 버튼 컴포넌트
+ */
 export const AuthButton = ({ title, width, height, color, onPress }) => {
   return (
-    <AuthStyle.Button
+    <TouchableOpacity
       onPress={onPress}
-      width={width}
-      height={height}
-      color={color}
+      style={AuthButtonStyle(width, height, color).button}
     >
-      <AuthStyle.Text>{title}</AuthStyle.Text>
-    </AuthStyle.Button>
+      <Text style={AuthButtonTextStyle.text}>{title}</Text>
+    </TouchableOpacity>
   );
 };
 
@@ -26,6 +32,16 @@ AuthButton.propTypes = {
   onPress: PropTypes.func,
 };
 
+/**
+ * 로그인 버튼
+ * @param {object} props 컴포넌트 props
+ * @param {string} title 버튼 텍스트
+ * @param {string} backgroundColor 버튼 배경색
+ * @param {string} textColor 버튼 텍스트 색
+ * @param {function} onPress 버튼 클릭 시 실행 함수
+ * @param {node} children 버튼 내부에 들어갈 로고 컴포넌트
+ * @returns {JSX.Element} 로그인 버튼 컴포넌트
+ */
 export const LoginButton = ({
   title,
   backgroundColor,
@@ -34,11 +50,9 @@ export const LoginButton = ({
   children,
 }) => {
   return (
-    <AuthStyle.LoginButton
+    <TouchableOpacity
       onPress={onPress}
-      width={220}
-      height={50}
-      backgroundColor={backgroundColor}
+      style={LoginButtonStyle(240, 50, backgroundColor).button}
     >
       {children != undefined && (
         <>
@@ -46,8 +60,8 @@ export const LoginButton = ({
           <SpaceBox width={20} />
         </>
       )}
-      <AuthStyle.LoginText textColor={textColor}>{title}</AuthStyle.LoginText>
-    </AuthStyle.LoginButton>
+      <Text style={LoginButtonTextStyle(textColor).text}>{title}</Text>
+    </TouchableOpacity>
   );
 };
 
@@ -59,6 +73,13 @@ LoginButton.propTypes = {
   children: PropTypes.node,
 };
 
+/**
+ * 텍스트 버튼 컴포넌트
+ * @param {object} props 컴포넌트 props
+ * @param {string} title 버튼 텍스트
+ * @param {function} onPress 버튼 클릭 시 실행 함수
+ * @returns {JSX.Element} 텍스트 버튼 컴포넌트
+ */
 export const AuthTextButton = ({ title, onPress }) => {
   return (
     <TouchableOpacity
@@ -77,36 +98,42 @@ AuthTextButton.propTypes = {
   onPress: PropTypes.func,
 };
 
-const AuthStyle = {
-  Button: styled.TouchableOpacity`
-    width: ${({ width }) => width}px;
-    height: ${({ height }) => height}px;
-    background-color: ${({ color }) => color || lightThemeColor.primary};
-    border-radius: 10px;
-    /* box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.2); */
-    justify-content: center;
-    align-items: center;
-  `,
-  Text: styled.Text`
-    font-size: 16px;
-  `,
-  LoginButton: styled.TouchableOpacity`
-    width: ${({ width }) => width}px;
-    height: ${({ height }) => height}px;
-    background-color: ${({ backgroundColor }) =>
-      backgroundColor || lightThemeColor.primary};
-    border-radius: 10px;
-    justify-content: center;
-    align-items: center;
-    padding: 10px;
-    flex-direction: row;
-    /* shadow-color: #000;
-    shadow-offset: 0px 2px;
-    shadow-opacity: 0.1;
-    elevation: 5; */
-  `,
-  LoginText: styled.Text`
-    font-size: 14px;
-    color: ${({ textColor }) => textColor || 'white'};
-  `,
-};
+const AuthButtonStyle = (width, height, backgroundColor) =>
+  StyleSheet.create({
+    button: {
+      width: width,
+      height: height,
+      backgroundColor: backgroundColor || lightThemeColor.primary,
+      borderRadius: 10,
+      justifyContent: 'center',
+      alignItems: 'center',
+    },
+  });
+
+const AuthButtonTextStyle = StyleSheet.create({
+  text: {
+    fontSize: 16,
+  },
+});
+
+const LoginButtonStyle = (width, height, backgroundColor) =>
+  StyleSheet.create({
+    button: {
+      width: width,
+      height: height,
+      backgroundColor: backgroundColor || lightThemeColor.primary,
+      borderRadius: 10,
+      justifyContent: 'center',
+      alignItems: 'center',
+      padding: 10,
+      flexDirection: 'row',
+    },
+  });
+
+const LoginButtonTextStyle = textColor =>
+  StyleSheet.create({
+    text: {
+      fontSize: 14,
+      color: textColor,
+    },
+  });

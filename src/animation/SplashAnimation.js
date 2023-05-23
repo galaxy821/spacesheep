@@ -1,5 +1,11 @@
 import { Animated, Easing } from 'react-native';
 
+/**
+ * Splash Content 나타나는 애니메이션
+ * @param {Animated.value} fadeAnim
+ * @param {function} setShowTitle
+ * @returns
+ */
 const fadeIn = (fadeAnim, setShowTitle) => {
   Animated.timing(fadeAnim, {
     toValue: 1,
@@ -10,6 +16,11 @@ const fadeIn = (fadeAnim, setShowTitle) => {
   }).start(() => setShowTitle(true));
 };
 
+/**
+ * Splash Content 사라지는 애니메이션
+ * @param {Animated.value} fadeOutAnim
+ * @returns
+ */
 const fadeOut = fadeOutAnim => {
   Animated.timing(fadeOutAnim, {
     toValue: 0,
@@ -29,6 +40,7 @@ export const SplashAnimation = {
  * splash screen 사라지는 애니메이션
  * @param {Animated.Value} fadeAnim
  * @param {function} setShowSplash
+ * @returns
  */
 export const fadeOutSplashScreen = (fadeAnim, setShowSplash) => {
   Animated.timing(fadeAnim, {

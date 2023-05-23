@@ -4,6 +4,13 @@ import { PropTypes } from 'prop-types';
 
 const { width } = Dimensions.get('window');
 
+/**
+ * 스크롤 배너
+ * @param {object} props 컴포넌트 props
+ * @param {number} rotationTime 배너 이미지 전환 시간
+ * @param {array} banner_images 배너 이미지 배열
+ * @returns {JSX.Element} 스크롤 배너 컴포넌트
+ */
 const Banner = ({ rotationTime, banner_images }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const flatListRef = useRef(null);

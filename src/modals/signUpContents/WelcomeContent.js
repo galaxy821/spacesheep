@@ -10,6 +10,11 @@ import { PropTypes } from 'prop-types';
 
 const welcome_animation = require('../../../assets/welcome_animation.webp');
 
+/**
+ * 회원가입 환영 콘탠츠
+ * @param {object} props 컴포넌트 props
+ * @returns {JSX.Element} 회원가입 환영 콘텐츠 컴포넌트
+ */
 const WelcomeContent = ({ nickname }) => {
   const navigation = useNavigation();
   const [viewAnim] = useState(new Animated.Value(0));

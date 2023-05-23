@@ -15,11 +15,18 @@ import { authStoreSelector } from '../../store/Auth';
 import { useSetRecoilState } from 'recoil';
 import { setToken } from '../../modules/Token';
 
+/**
+ * 비밀번호 설정 콘텐츠
+ * @param {object} props 컴포넌트 props
+ * @param {string} email 이메일
+ * @param {function} setCurrentSignUpContent 회원가입 컨텐츠 변경 함수
+ * @param {function} openErrorModal 에러 모달 오픈 함수
+ * @returns {JSX.Element} 비밀번호 설정 콘텐츠 컴포넌트
+ */
 const SetPasswordContent = ({
   email,
   setCurrentSignUpContent,
-  setCurrentErrorMessage,
-  setOpenModal,
+  openErrorModal,
 }) => {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
@@ -51,12 +58,10 @@ const SetPasswordContent = ({
 
   const handleSignUp = async () => {
     if (password.length < 8) {
-      setCurrentErrorMessage('비밀번호는 8자리 이상이어야 합니다.');
-      setOpenModal(true);
+      openErrorModal('비밀번호는 8자리 이상이어야 합니다.');
       return;
     } else if (password !== confirmPassword) {
-      setCurrentErrorMessage('비밀번호가 일치하지 않습니다.');
-      setOpenModal(true);
+      openErrorModal('비밀번호가 일치하지 않습니다.');
       return;
     } else {
       //sign up
@@ -70,8 +75,7 @@ const SetPasswordContent = ({
         });
         fadeOut();
       } else {
-        setCurrentErrorMessage('회원가입에 실패했습니다.');
-        setOpenModal(true);
+        openErrorModal('회원가입에 실패했습니다.');
         return;
       }
     }
@@ -132,8 +136,7 @@ const SetPasswordContent = ({
 SetPasswordContent.propTypes = {
   email: PropTypes.string.isRequired,
   setCurrentSignUpContent: PropTypes.func,
-  setCurrentErrorMessage: PropTypes.func,
-  setOpenModal: PropTypes.func,
+  openErrorModal: PropTypes.func,
 };
 
 export default SetPasswordContent;
