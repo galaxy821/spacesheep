@@ -1,5 +1,6 @@
 import { StyleSheet, TextInput, TouchableOpacity, View } from 'react-native';
 import { SvgIcon } from '../assets/icons/SvgIcon';
+import { useEffect, useState } from 'react';
 
 const PLACEHOLDER = 'Search';
 
@@ -7,17 +8,27 @@ const PLACEHOLDER = 'Search';
  * 검색 바
  * @returns {JSX.Element} 검색 바 컴포넌트
  */
-const SearchBar = () => (
-  <View style={SearchBarStyle.searchBarBox}>
-    <TextInput
-      placeholder={PLACEHOLDER}
-      style={SearchBarStyle.searchBarInput}
-    />
-    <TouchableOpacity style={SearchBarStyle.searchBarIcon}>
-      <SvgIcon.SearchIcon />
-    </TouchableOpacity>
-  </View>
-);
+const SearchBar = () => {
+  const [value, setValue] = useState('');
+
+  useEffect(() => {
+    console.log(value);
+  }, [value]);
+
+  return (
+    <View style={SearchBarStyle.searchBarBox}>
+      <TextInput
+        placeholder={PLACEHOLDER}
+        value={value}
+        onChangeText={setValue}
+        style={SearchBarStyle.searchBarInput}
+      />
+      <TouchableOpacity style={SearchBarStyle.searchBarIcon}>
+        <SvgIcon.SearchIcon />
+      </TouchableOpacity>
+    </View>
+  );
+};
 
 export default SearchBar;
 
