@@ -10,6 +10,7 @@ import { useNavigation } from '@react-navigation/native';
 import { PropTypes } from 'prop-types';
 import { AppRoute } from '../navigations/routes';
 import { KODDI_FONT_BOLD } from '../assets/fonts/KoddiUOnGothic';
+import { LinearGradient } from 'react-native-svg';
 
 const screenWidth = (Dimensions.get('window').width - 60) / 3;
 
@@ -32,12 +33,14 @@ const SpaceThumbnail = ({ space }) => {
       }}
       style={SpaceThumbnailStyle().box}
     >
+      {/* <LinearGradient colors={['#FF9800', '#FF5722']} style={{ flex: 1 }}> */}
       <View
         screenWidth={screenWidth}
-        style={SpaceThumbnailStyle(screenWidth).content}
+        style={SpaceThumbnailStyle(screenWidth, color).content}
       >
         <Image />
       </View>
+      {/* </LinearGradient> */}
       <View style={SpaceThumbnailStyle(screenWidth).titleBox}>
         <Text
           style={SpaceThumbnailStyle().title}
@@ -57,7 +60,7 @@ SpaceThumbnail.propTypes = {
 
 export default SpaceThumbnail;
 
-const SpaceThumbnailStyle = screenWidth =>
+const SpaceThumbnailStyle = (screenWidth, color) =>
   StyleSheet.create({
     box: {
       marginBottom: 15,
@@ -67,13 +70,14 @@ const SpaceThumbnailStyle = screenWidth =>
       width: screenWidth,
       height: screenWidth,
       borderRadius: 25,
-      backgroundColor: '#f1e09b',
+      backgroundColor: color,
     },
     titleBox: {
       paddingLeft: 10,
       marginTop: 5,
       width: screenWidth,
       display: 'flex',
+      paddingRight: 10,
     },
     title: {
       fontSize: 14,

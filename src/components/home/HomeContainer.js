@@ -12,45 +12,95 @@ const BOTTOM_TAB_SAFE_AREA = 100;
 
 /**
  * 홈 화면 콘텐츠
+ * @component
+ * @param {object} props
  * @param {number} safeArea 상단바 높이
+ * @param {string} currentInterest 현재 선택된 관심사
+ * @param {function} setCurrentInterest 현재 선택된 관심사 변경 함수
+ * @param {object} bannerItem 홈 화면 배너 아이템
+ * @param {object} subject 홈 화면 관심 주제 리스트
+ * @param {object} spaces 홈 화면 공간 리스트
  * @returns {JSX.Element} 홈 화면 콘텐츠 컴포넌트
  */
-const HomeContainer = ({ safeArea }) => {
+const HomeContainer = ({
+  safeArea,
+  currentInterest,
+  setCurrentInterest,
+  bannerItem,
+  subject,
+  spaces,
+}) => {
   const renderItem = ({ item }) => <SpaceThumbnail space={item} />;
 
   return (
-    <FlatList
-      data={dummyData}
-      renderItem={renderItem}
-      keyExtractor={item => item.id.toString()}
-      numColumns={NUM_OF_COLUMNS}
-      ListHeaderComponent={HomeScreenHeader}
-      safeArea={safeArea}
-      bottomBarArea={BOTTOM_TAB_SAFE_AREA}
-      showsVerticalScrollIndicator={false}
-      bounces={false}
-      style={HomeContainerStyles(BOTTOM_TAB_SAFE_AREA).spaceContentSection}
-    />
+    <View>
+      <FlatList
+        data={dummyData} // spaces
+        renderItem={renderItem}
+        keyExtractor={item => item.id.toString()}
+        numColumns={NUM_OF_COLUMNS}
+        ListHeaderComponent={() => (
+          <HomeScreenHeader
+            currentInterest={currentInterest}
+            setCurrentInterest={setCurrentInterest}
+            bannerItem={bannerItem}
+            subject={subject}
+          />
+        )}
+        safeArea={safeArea}
+        bottomBarArea={BOTTOM_TAB_SAFE_AREA}
+        showsVerticalScrollIndicator={false}
+        bounces={false}
+        style={HomeContainerStyles(BOTTOM_TAB_SAFE_AREA).spaceContentSection}
+      />
+    </View>
   );
 };
 
 HomeContainer.propTypes = {
   safeArea: PropTypes.number,
+  currentInterest: PropTypes.string,
+  setCurrentInterest: PropTypes.func,
+  bannerItem: PropTypes.array,
+  subject: PropTypes.array,
+  spaces: PropTypes.array,
 };
 
 /**
  * 홈 화면 헤더
+ * @component
+ * @param {object} props
+ * @param {string} currentInterest 현재 선택된 관심사
+ * @param {function} setCurrentInterest 현재 선택된 관심사 변경 함수
+ * @param {object} bannerItem 홈 화면 배너 아이템
+ * @param {object} subject 홈 화면 관심 주제 리스트
  * @returns {JSX.Element} 홈 화면 헤더 컴포넌트
  */
-const HomeScreenHeader = () => {
+const HomeScreenHeader = ({
+  currentInterest,
+  setCurrentInterest,
+  bannerItem,
+  subject,
+}) => {
   return (
     <View>
       <TitleSection />
-      <BannerSection />
+      <BannerSection bannerItem={bannerItem} />
       <SearchBar />
-      <InterestSection />
+      <InterestSection
+        currentInterest={currentInterest}
+        setCurrentInterest={setCurrentInterest}
+        subject={subject}
+      />
     </View>
   );
+};
+
+HomeScreenHeader.propTypes = {
+  currentInterest: PropTypes.string,
+  setCurrentInterest: PropTypes.func,
+  bannerItem: PropTypes.array,
+  subject: PropTypes.array,
 };
 
 export default HomeContainer;

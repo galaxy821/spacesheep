@@ -27,30 +27,38 @@ const HomeWithToken = token => {
  * 홈 화면 배너 아이템 요청 (GET /home/bannerItem)
  * @returns {AxiosPromise}
  */
-export const getHomeBannerItem = () => Home.get('/home/bannerItem');
+const getHomeBannerItem = () => Home.get('/home/bannerItem');
 
 /**
  * 홈 화면 관심 주제 리스트 요청 (GET /home/popularItem)
  * @returns {AxiosPromise}
  */
-export const getHomeInterestSubjectItem = () => Home.get('/home/popularItem');
+const getHomeInterestSubjectItem = () => Home.get('/home/popularItem');
 
 /**
  * 홈 화면 전체 인기 space 리스트 요청 (GET /home/spaceItem)
  * @returns {AxiosPromise}
  */
-export const getHomeSpacesInfo = () => Home.get('/home/spacesInfo');
+const getHomeSpacesInfo = () => Home.get('/home/spacesInfo');
 
 /**
  * Space 주제에 따른 space 리스트 요청 (GET /home/spacesInfo)
  * @param {string} subject space 주체
  * @returns {AxiosPromise}
  */
-export const getHomeSpacesInfoForInterestSubject = subject =>
+const getHomeSpacesInfoForInterestSubject = subject =>
   Home.get('/home/spacesInfo', { params: { subject } });
 
 /**
  * 공지 사항 리스트 요청 (GET /home/notice)
  * @returns {AxiosPromise}
  */
-export const getHomeNotice = () => Home.post('/home/notice');
+const getHomeNotice = () => Home.post('/home/notice');
+
+export const homeApi = {
+  getHomeBannerItem,
+  getHomeInterestSubjectItem,
+  getHomeSpacesInfo,
+  getHomeSpacesInfoForInterestSubject,
+  getHomeNotice,
+};
