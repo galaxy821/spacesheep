@@ -5,7 +5,7 @@ import TitleSection from './HomeHeader';
 import SearchBar from '../SearchBar';
 import InterestSection from './InterestSection';
 import BannerSection from './BannerSection';
-import { dummyData } from '../../test/dummy/SpaceThumbnailData';
+import dummyData from '../../../assets/dummy/home/space_info_dummy.json';
 
 const NUM_OF_COLUMNS = 3;
 const BOTTOM_TAB_SAFE_AREA = 100;

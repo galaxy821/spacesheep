@@ -38,8 +38,12 @@ const SpaceThumbnail = ({ space }) => {
       >
         <Image />
       </View>
-      <View style={SpaceThumbnailStyle().titleBox}>
-        <Text style={SpaceThumbnailStyle().title} numberOfLines={1}>
+      <View style={SpaceThumbnailStyle(screenWidth).titleBox}>
+        <Text
+          style={SpaceThumbnailStyle().title}
+          numberOfLines={1}
+          ellipsizeMode="tail"
+        >
           {name}
         </Text>
       </View>
@@ -68,9 +72,13 @@ const SpaceThumbnailStyle = screenWidth =>
     titleBox: {
       paddingLeft: 10,
       marginTop: 5,
+      width: screenWidth,
+      display: 'flex',
     },
     title: {
       fontSize: 14,
+      width: screenWidth,
       fontFamily: KODDI_FONT_BOLD,
+      flexWrap: 'wrap',
     },
   });

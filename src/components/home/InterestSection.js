@@ -1,7 +1,7 @@
 import { StyleSheet, Text, View } from 'react-native';
 import InterestButton from './InterestButton';
-import { INTEREST_DUMMY_DATA } from '../../test/dummy/InterestData';
 import { KODDI_FONT_BOLD } from '../../assets/fonts/KoddiUOnGothic';
+import dummyData from '../../../assets/dummy/home/interest_subject_dummy.json';
 
 const INTEREST_SECTION_TEXT = '관심사를 골라보세요';
 
@@ -14,8 +14,8 @@ const InterestSection = () => {
     <View style={InterestSectionStyle.container}>
       <Text style={InterestSectionStyle.title}>{INTEREST_SECTION_TEXT}</Text>
       <View style={InterestSectionStyle.content}>
-        {INTEREST_DUMMY_DATA.map((interest, index) => (
-          <InterestButton key={index} title={interest} />
+        {dummyData.map((interest, index) => (
+          <InterestButton key={index} title={interest.name} />
         ))}
       </View>
     </View>
