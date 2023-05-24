@@ -51,6 +51,15 @@ export const authSignUpWithEmail = (email, password) =>
   Auth.post('/auth/signup', { email, password });
 
 /**
+ * email, password로 로인 (POST /auth/signin)
+ * @param {string} email 이메일
+ * @param {string} password 비밀번호
+ * @returns {AxiosPromise}
+ */
+export const authSignIn = (email, password) =>
+  Auth.post('/auth/signin', { email, password });
+
+/**
  * nickname 설정 요청 (POST /auth/setNickname)
  * @param {string} token 사용자 토큰
  * @param {string} nickname 닉네임
@@ -58,3 +67,27 @@ export const authSignUpWithEmail = (email, password) =>
  */
 export const authSetNickname = (token, nickname) =>
   AuthWithToken(token).post('/auth/setNickname', { nickname });
+
+/**
+ * 토큰 인증 요청 (GET /auth)
+ * @param {string} token 사용자 토큰
+ * @returns {AxiosPromise}
+ */
+export const authVerifiedToken = token => AuthWithToken(token).get('/auth');
+
+/**
+ * 토큰 갱신 요청 (GET /auth/refresh-token)
+ * @param {string} token 사용자 토큰
+ * @returns {AxiosPromise}
+ */
+export const authRefreshToken = token =>
+  AuthWithToken(token).get('/auth/refresh-token');
+
+/**
+ * 사용자 프로필 업데이트 요청 (PATCH /auth/update)
+ * @param {string} token 사용자 토큰
+ * @param {object} profile 사용자 프로필 정보
+ * @returns {AxiosPromise}
+ */
+export const authUpdate = (token, profile) =>
+  AuthWithToken(token).patch('/auth/update', { profile });
