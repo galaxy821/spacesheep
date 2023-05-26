@@ -37,13 +37,13 @@ const RootNavigator = () => {
       // eslint-disable-next-line no-console
       console.log(`JSX/RootNavigator : ${error}`);
     } finally {
-      setIsLoaded(true);
-      fadeOutSplashScreen(fadeAnim, setShowSplash);
+      setIsLoaded(prev => !prev);
     }
   };
 
   useEffect(() => {
     loadContent();
+    // fadeOutSplashScreen(fadeAnim, setShowSplash);
     //eslint-disable-next-line
   }, []);
 

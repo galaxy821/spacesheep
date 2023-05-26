@@ -1,4 +1,5 @@
 import { StyleSheet, TextInput, TouchableOpacity, View } from 'react-native';
+// import { AutocompleteDropdown } from 'react-native-autocomplete-dropdown';
 import { SvgIcon } from '../assets/icons/SvgIcon';
 import { useEffect, useState } from 'react';
 
@@ -10,10 +11,15 @@ const PLACEHOLDER = 'Search';
  */
 const SearchBar = () => {
   const [value, setValue] = useState('');
+  const [selectedItem, setSelectedItem] = useState(null);
 
   useEffect(() => {
     console.log(value);
   }, [value]);
+
+  useEffect(() => {
+    console.log(selectedItem);
+  }, [selectedItem]);
 
   return (
     <View style={SearchBarStyle.searchBarBox}>
@@ -26,6 +32,19 @@ const SearchBar = () => {
       <TouchableOpacity style={SearchBarStyle.searchBarIcon}>
         <SvgIcon.SearchIcon />
       </TouchableOpacity>
+      {/* <AutocompleteDropdown
+        clearOnFocus={false}
+        closeOnBlur={true}
+        closeOnSubmit={false}
+        initialValue={{ id: '2' }} // or just '2'
+        onSelectItem={setSelectedItem}
+        dataSet={[
+          { id: '1', title: 'Alpha' },
+          { id: '2', title: 'Beta' },
+          { id: '3', title: 'Gamma' },
+        ]}
+      /> */}
+      ;
     </View>
   );
 };
