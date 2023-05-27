@@ -92,7 +92,6 @@ const HomeScreenHeader = ({
     <View>
       <TitleSection />
       <BannerSection bannerItem={bannerItem} />
-      {/* <SearchBar /> */}
       <View
         style={[
           HomeContainerStyles.section,
@@ -101,8 +100,6 @@ const HomeScreenHeader = ({
       >
         <AutoCompleteSearchBar />
       </View>
-      {/* <AutocompleteSearchBar /> */}
-
       <InterestSection
         currentInterest={currentInterest}
         setCurrentInterest={setCurrentInterest}
