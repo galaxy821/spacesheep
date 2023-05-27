@@ -9,6 +9,8 @@ import SearchBar, {
 import InterestSection from './InterestSection';
 import BannerSection from './BannerSection';
 import dummyData from '../../../assets/dummy/home/space_info_dummy.json';
+import { AutocompleteDropdownContextProvider } from 'react-native-autocomplete-dropdown';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 const NUM_OF_COLUMNS = 3;
 const BOTTOM_TAB_SAFE_AREA = 100;
@@ -50,10 +52,11 @@ const HomeContainer = ({
             subject={subject}
           />
         )}
-        safeArea={safeArea}
-        bottomBarArea={BOTTOM_TAB_SAFE_AREA}
+        // safeArea={safeArea}
+        // bottomBarArea={BOTTOM_TAB_SAFE_AREA}
         showsVerticalScrollIndicator={false}
         bounces={false}
+        // keyboardShouldPersistTaps="always"
         style={HomeContainerStyles(BOTTOM_TAB_SAFE_AREA).spaceContentSection}
       />
     </View>
@@ -89,11 +92,11 @@ const HomeScreenHeader = ({
     <View>
       <TitleSection />
       <BannerSection bannerItem={bannerItem} />
-      <SearchBar />
+      {/* <SearchBar /> */}
       <View
         style={[
           HomeContainerStyles.section,
-          Platform.select({ ios: { zIndex: 96 } }),
+          Platform.select({ ios: { zIndex: 1 } }),
         ]}
       >
         <AutoCompleteSearchBar />
@@ -126,5 +129,6 @@ const HomeContainerStyles = bottomBarArea =>
     },
     section: {
       marginBottom: 40,
+      backgroundColor: '#fff',
     },
   });
