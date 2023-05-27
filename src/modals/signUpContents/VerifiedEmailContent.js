@@ -44,23 +44,25 @@ const VerifiedEmailContent = ({ email, setCurrentSignUpContent }) => {
   };
 
   const handleTransition = async () => {
+    console.log('handleTransition');
     fadeOut();
     await delay(500);
     setIsVerified(true);
-    AuthAnimation.fadeIn(mainTextAnim, 300);
+    AuthAnimation.fadeIn(mainTextAnim, 300).start();
 
-    await delay(2000);
-    AuthAnimation.fadeOut(mainTextAnim, 300);
+    await delay(1000);
+    AuthAnimation.fadeOut(mainTextAnim, 300).start();
 
     await delay(500);
     setCurrentSignUpContent(signUpContent.SET_PASSWORD);
   };
 
   useEffect(() => {
+    console.log('useEffect');
     fadeIn();
     setTimeout(() => {
       handleTransition();
-    }, 5000);
+    }, 3000);
     //eslint-disable-next-line
   }, []);
 

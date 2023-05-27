@@ -1,8 +1,11 @@
-import { FlatList, StyleSheet, View } from 'react-native';
+import { FlatList, Platform, StyleSheet, View } from 'react-native';
 import { PropTypes } from 'prop-types';
 import SpaceThumbnail from '../SpaceThumbnail';
 import TitleSection from './HomeHeader';
-import SearchBar from '../SearchBar';
+import SearchBar, {
+  AutoCompleteSearchBar,
+  AutocompleteSearchBar,
+} from '../SearchBar';
 import InterestSection from './InterestSection';
 import BannerSection from './BannerSection';
 import dummyData from '../../../assets/dummy/home/space_info_dummy.json';
@@ -87,6 +90,16 @@ const HomeScreenHeader = ({
       <TitleSection />
       <BannerSection bannerItem={bannerItem} />
       <SearchBar />
+      <View
+        style={[
+          HomeContainerStyles.section,
+          Platform.select({ ios: { zIndex: 96 } }),
+        ]}
+      >
+        <AutoCompleteSearchBar />
+      </View>
+      {/* <AutocompleteSearchBar /> */}
+
       <InterestSection
         currentInterest={currentInterest}
         setCurrentInterest={setCurrentInterest}
@@ -110,5 +123,8 @@ const HomeContainerStyles = bottomBarArea =>
     spaceContentSection: {
       backgroundColor: '#fff',
       paddingBottom: bottomBarArea,
+    },
+    section: {
+      marginBottom: 40,
     },
   });

@@ -6,6 +6,7 @@ import {
   Dimensions,
   Text,
   Animated,
+  Easing,
 } from 'react-native';
 import { useRef, useState, useEffect } from 'react';
 import { Feather } from '@expo/vector-icons';

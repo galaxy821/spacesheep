@@ -16,7 +16,7 @@ const Search = axios.create({
  * @param {string} keyword 검색 키워드
  * @returns {AxiosPromise}
  */
-const getSearchSpacesInfo = keyword =>
+export const getSearchSpacesInfo = keyword =>
   Search.get('/search/spacesInfo', { params: { keyword } });
 
 /**
@@ -24,10 +24,5 @@ const getSearchSpacesInfo = keyword =>
  * @param {string} input 검색 입력 값
  * @returns
  */
-const getSearchKeyword = input =>
+export const getSearchKeyword = input =>
   Search.get('/search/keyword', { params: { input } });
-
-export const searchApi = {
-  getSearchSpacesInfo,
-  getSearchKeyword,
-};
