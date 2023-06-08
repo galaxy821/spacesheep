@@ -102,30 +102,19 @@ export const AutoCompleteSearchBar = () => {
             <Text style={{ fontSize: 15, color: '#000' }}>{item.name}</Text>
           </View>
         )}
-        // suggestionsListMaxHeight={200}
         suggestionsListMaxHeight={
           // Dimensions.get('window').height * 0.1
           145
         }
-        containerStyle={
-          SearchBarStyle.innerContainer
-        } /* Auto Complete 컨테이너 */
+        containerStyle={SearchBarStyle.innerContainer}
         textInputProps={{
           placeholder: PLACEHOLDER,
           style: SearchBarStyle.textInput,
-        }} /* 검색바 testInput */
-        inputContainerStyle={
-          SearchBarStyle.inputContainer
-        } /* 검색바 외부 컨테이너 */
-        suggestionsListTextStyle={
-          SearchBarStyle.keywordText
-        } /**어디 스타일인지 파악 안됨... */
-        suggestionsListContainerStyle={
-          SearchBarStyle.keywordContainer
-        } /* 추천 keyword 컨터이너 */
-        rightButtonsContainerStyle={
-          SearchBarStyle.rightButton
-        } /* 오른쪽 버튼 */
+        }}
+        inputContainerStyle={SearchBarStyle.inputContainer}
+        suggestionsListTextStyle={SearchBarStyle.keywordText}
+        suggestionsListContainerStyle={SearchBarStyle.keywordContainer}
+        rightButtonsContainerStyle={SearchBarStyle.rightButton}
         showChevron={false}
       />
       <TouchableOpacity style={SearchBarStyle.searchButton}>
