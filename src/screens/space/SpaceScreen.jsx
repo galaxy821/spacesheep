@@ -9,8 +9,9 @@ import { MaterialIcons } from '@expo/vector-icons';
 
 import dummydata from '../../../assets/dummy/message/message_dummy.json';
 import ChatContainer from '../../components/space/ChatContainer';
-// import socket from '../../modules/Chat';
-
+// import socket, { socketFunctions, socketWithUser } from '../../modules/Chat';
+import { useRecoilState } from 'recoil';
+import { authStoreSelector } from '../../store/Auth';
 // const { StatusBarManager } = NativeModules;
 
 const SpaceScreen = () => {
@@ -22,12 +23,17 @@ const SpaceScreen = () => {
   const route = useRoute();
 
   // const { safeArea } = useSafeAreaInsets();
+  // eslint-disable-next-line
+  const [statusBarHeight, setStatusBarHeight] = useState(0);
+
+  const userToken = useRecoilState(authStoreSelector);
+
   const handleBackPress = () => {
     navigation.goBack();
   };
 
-  const handleSend = () => {
-    // Add the message to the messages array
+  const onSendMessage = () => {
+    // 메시지 전송
     if (input === '') return;
 
     const newMessage = {
@@ -35,8 +41,10 @@ const SpaceScreen = () => {
       message: input,
       user_id: 23214,
     };
-    setMessages([newMessage, ...messages]);
-    // Clear the input field
+
+    // socketFunctions.sendMessage(newMessage); // 서버에 메시지 전송
+    setMessages([newMessage, ...messages]); // 임시로 메시지 추가
+
     setInput('');
   };
 
@@ -61,15 +69,37 @@ const SpaceScreen = () => {
   //     : null;
   // }, []);
 
-  const [statusBarHeight, setStatusBarHeight] = useState(0);
-
   useEffect(() => {
+    // 채팅방 입장 시 방 정보 설정 및 소켓 연결
     setSpaceInfo({
       id: route.params.id,
       name: route.params.name,
     });
     setMessages(dummydata);
-  }, [route.params]);
+
+    /**room 개념으로 할지, 아니면 nampespace으로 할지 추후 백엔드 구현 후 결정 예정 : 현재는 namespace으로 설정*/
+    /*
+    if(userToken.accessToken !== null){ // 로그인 상태일 때
+      socketWithUser(userToken.accessToken, route.params.id).connect();
+    }
+    else{ // 비로그인 상태일 때
+      socket(route.params.id).connect();
+    }*/
+  }, [route.params, userToken]);
+
+  /* socket message 리스너
+  useEffect(() => {
+    const messageHandler = message => {
+      setMessages([message, ...messages]);
+    };
+
+    socket.on('message', messageHandler);
+
+    return () => {
+      socket.off('message', messageHandler);
+    };
+  }, [messages]);
+  */
 
   return (
     <SafeAreaView
@@ -89,7 +119,7 @@ const SpaceScreen = () => {
           messages={messages}
           input={input}
           setInput={setInput}
-          handleSend={handleSend}
+          onSendMessage={onSendMessage}
           handleBackPress={handleBackPress}
         />
       </KeyboardAvoidingView>

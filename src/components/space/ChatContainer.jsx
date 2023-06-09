@@ -11,13 +11,14 @@ import {
 } from 'react-native';
 import { Entypo, Ionicons, MaterialIcons } from '@expo/vector-icons';
 import ChatList from './ChatList';
+// import socket from '../../modules/Chat';
 
 const ChatContainer = ({
   spaceInfo,
   messages,
   input,
   setInput,
-  handleSend,
+  onSendMessage,
   handleBackPress,
 }) => {
   const textInputRef = useRef(null);
@@ -81,7 +82,7 @@ const ChatContainer = ({
             placeholder="메시지를 입력하세요."
           />
           <TouchableOpacity
-            onPress={handleSend}
+            onPress={onSendMessage}
             style={chatContainerStyle.textInputContainerButton}
           >
             <Ionicons name="ios-send" size={24} color="black" />
@@ -106,7 +107,7 @@ ChatContainer.propTypes = {
   messages: PropTypes.array,
   input: PropTypes.string.isRequired,
   setInput: PropTypes.func.isRequired,
-  handleSend: PropTypes.func.isRequired,
+  onSendMessage: PropTypes.func.isRequired,
   handleBackPress: PropTypes.func.isRequired,
 };
 
